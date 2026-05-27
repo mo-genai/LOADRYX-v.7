@@ -47,10 +47,14 @@ export function Hero() {
               playsInline
               preload="metadata"
               poster={HERO_POSTER_SRC}
-              className="relative w-full h-full object-cover scale-[1.08] -translate-x-[1%]"
-              style={{
-                objectPosition: 'center center',
-                minHeight: '100vh',
+              className="relative h-full object-cover"
+               style={{
+                 width: '125%',
+                 maxWidth: 'none',
+                 minHeight: '100vh',
+                 objectPosition: 'center center',
+                 transform: 'translateX(-12%)',
+                 transformOrigin: 'center center',
               }}
             >
               <source src={HERO_VIDEO_SRC} type="video/mp4" />
