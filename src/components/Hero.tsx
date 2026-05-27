@@ -49,7 +49,7 @@ export function Hero() {
               poster={HERO_POSTER_SRC}
               className="relative w-full h-full object-cover"
               style={{
-                objectPosition: 'center top',
+                objectPosition: '45% center',
                 minHeight: '100vh',
               }}
             >
