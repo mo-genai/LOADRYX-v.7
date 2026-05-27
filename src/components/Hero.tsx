@@ -4,9 +4,9 @@ import { HeroDotGrid } from './HeroDotGrid'
 import { VariableProximity } from './VariableProximity'
 
 const HERO_VIDEO_SRC =
-  'https://res.cloudinary.com/dmp1fo2j4/video/upload/v1779660274/X_4K_szqe2e.mp4'
+  'https://res.cloudinary.com/dmp1fo2j4/video/upload/v1779897126/Hero_background_video_middle_w4q8kl.mp4'
 const HERO_POSTER_SRC =
-  'https://res.cloudinary.com/dmp1fo2j4/image/upload/v1779661749/X2_pw7s8m.png'
+  'https://res.cloudinary.com/dmp1fo2j4/image/upload/v1779896891/Hero_fallback_image_middle_zix3fb.png'
 
 // The dual-side horizontal mask used on both the video and its placeholder.
 const SIDE_MASK =
