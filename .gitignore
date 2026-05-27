@@ -12,10 +12,6 @@ dist
 dist-ssr
 *.local
 
-# GitHub Pages is deployed from Vite's dist output by Actions.
-/assets/
-/favicon.svg
-
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
