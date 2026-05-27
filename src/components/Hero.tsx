@@ -47,9 +47,9 @@ export function Hero() {
               playsInline
               preload="metadata"
               poster={HERO_POSTER_SRC}
-              className="relative w-full h-full object-cover"
+              className="relative w-full h-full object-cover scale-[1.08] -translate-x-[4%]"
               style={{
-                objectPosition: '45% center',
+                objectPosition: 'center center',
                 minHeight: '100vh',
               }}
             >
