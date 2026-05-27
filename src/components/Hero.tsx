@@ -4,7 +4,7 @@ import { HeroDotGrid } from './HeroDotGrid'
 import { VariableProximity } from './VariableProximity'
 
 const HERO_VIDEO_SRC =
-  '1.mp4'
+  '12.mp4'
 const HERO_POSTER_SRC =
   'https://res.cloudinary.com/dmp1fo2j4/image/upload/v1779896891/Hero_fallback_image_middle_zix3fb.png'
 
