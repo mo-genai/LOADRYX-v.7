@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import { HERO } from '../data/content'
+import { HeroDotGrid } from './HeroDotGrid'
 import { VariableProximity } from './VariableProximity'
 
 const HERO_VIDEO_SRC =
@@ -84,6 +85,10 @@ export function Hero() {
               'radial-gradient(115% 115% at 50% 0%, transparent 0%, var(--color-background) 90%)',
           }}
         />
+
+        {/* --------------- Layer 5.5: ReactBits DotGrid (hero only) --------- */}
+        {/* Sits above the vignettes (-z-10) and below the in-flow content. */}
+        <HeroDotGrid />
 
         {/* --------------- Layer 6: content (title + buttons) --------------- */}
         <div className="mx-auto max-w-6xl px-4 sm:px-4 md:px-12 lg:px-12 xl:px-16 2xl:px-16 text-center">

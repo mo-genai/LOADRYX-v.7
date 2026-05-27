@@ -153,12 +153,16 @@ export function AmbientCanvas() {
       return factor
     }
 
-    /* ---- section intensity by document Y ---- */
+    /* ---- section intensity by document Y ----
+     * The hero now has its own HeroDotGrid canvas, so the ambient field is
+     * suppressed across the hero zone (0 inside, ramping up to mid intensity
+     * across the section boundary so the transition stays smooth).
+     */
     const intensityAtY = (y: number): number => {
       const heroFadeEnd = heroBottom + 200
       const footerFadeStart = footerTop - 200
-      if (y < heroBottom) return 1.0
-      if (y < heroFadeEnd) return 1.0 - ((y - heroBottom) / 200) * 0.55
+      if (y < heroBottom) return 0 // hero handled by HeroDotGrid
+      if (y < heroFadeEnd) return ((y - heroBottom) / 200) * 0.45
       if (y < footerFadeStart) return 0.45
       if (y < footerTop) return 0.45 - ((y - footerFadeStart) / 200) * 0.35
       return 0.1
