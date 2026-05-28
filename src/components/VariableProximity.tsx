@@ -117,7 +117,10 @@ export const VariableProximity = forwardRef<HTMLSpanElement, Props>(
       }
     }, [axes, fromFontVariationSettings, radius, falloff, containerRef])
 
-    // Render: words wrapped so they don't break, letters individually addressable.
+    // Arabic is cursive: isolating each letter in its own inline-block box
+    // breaks the joining. For Arabic labels we keep whole words intact and
+    // drive the proximity weight per word, preserving the visual feel.
+    const isArabic = /[؀-ۿ]/.test(label)
     const words = label.split(' ')
     let i = 0
     return (
@@ -126,34 +129,60 @@ export const VariableProximity = forwardRef<HTMLSpanElement, Props>(
         className={`${className} variable-proximity`}
         style={{ display: 'inline' }}
       >
-        {words.map((w, wi) => (
-          <span
-            key={wi}
-            style={{ display: 'inline-block', whiteSpace: 'nowrap' }}
-          >
-            {[...w].map((ch) => {
+        {isArabic
+          ? words.map((w, wi) => {
               const idx = i++
               return (
                 <span
-                  key={idx}
-                  ref={(el) => {
-                    letterRefs.current[idx] = el
-                  }}
-                  style={{
-                    display: 'inline-block',
-                    fontVariationSettings: fromFontVariationSettings,
-                  }}
-                  aria-hidden
+                  key={wi}
+                  style={{ display: 'inline-block', whiteSpace: 'nowrap' }}
                 >
-                  {ch}
+                  <span
+                    ref={(el) => {
+                      letterRefs.current[idx] = el
+                    }}
+                    style={{
+                      display: 'inline-block',
+                      fontVariationSettings: fromFontVariationSettings,
+                    }}
+                    aria-hidden
+                  >
+                    {w}
+                  </span>
+                  {wi < words.length - 1 && (
+                    <span style={{ display: 'inline-block' }}>&nbsp;</span>
+                  )}
                 </span>
               )
-            })}
-            {wi < words.length - 1 && (
-              <span style={{ display: 'inline-block' }}>&nbsp;</span>
-            )}
-          </span>
-        ))}
+            })
+          : words.map((w, wi) => (
+              <span
+                key={wi}
+                style={{ display: 'inline-block', whiteSpace: 'nowrap' }}
+              >
+                {[...w].map((ch) => {
+                  const idx = i++
+                  return (
+                    <span
+                      key={idx}
+                      ref={(el) => {
+                        letterRefs.current[idx] = el
+                      }}
+                      style={{
+                        display: 'inline-block',
+                        fontVariationSettings: fromFontVariationSettings,
+                      }}
+                      aria-hidden
+                    >
+                      {ch}
+                    </span>
+                  )
+                })}
+                {wi < words.length - 1 && (
+                  <span style={{ display: 'inline-block' }}>&nbsp;</span>
+                )}
+              </span>
+            ))}
         <span className="sr-only">{label}</span>
       </span>
     )

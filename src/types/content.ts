@@ -6,7 +6,19 @@ export interface NavLink {
 export interface FeatureCard {
   title: string;
   description: string;
-  icon: 'shield' | 'sparkles' | 'lock' | 'code' | 'thumb' | 'shield-coins';
+  icon: 'performance' | 'support' | 'updates' | 'security' | 'activation' | 'warranty';
+}
+
+export interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+export interface ContactChannel {
+  kind: 'whatsapp' | 'call';
+  label: string;
+  value: string;
+  href: string;
 }
 
 export interface FeatureGroup {

@@ -1,5 +1,7 @@
 import type {
   BenefitCard,
+  ContactChannel,
+  FaqItem,
   FeatureCard,
   FeatureGroup,
   FooterColumn,
@@ -13,60 +15,131 @@ export const BRAND = 'NIMBUS'
 export const BRAND_TAGLINE = 'Production-Ready Tools for Modern Teams'
 
 export const NAV_LINKS: NavLink[] = [
-  { label: 'Home', href: '#' },
-  { label: 'Products', href: '#products' },
-  { label: 'Status', href: '#status' },
-  { label: 'How-to', href: '#how' },
-  { label: 'FAQ', href: '#faq' },
-  { label: 'Forums', href: '#forums' },
+  { label: 'الرئيسية', href: '#' },
+  { label: 'المنتجات', href: '#products' },
+  { label: 'الأسئلة الشائعة', href: '#faq' },
 ]
 
 export const HERO = {
-  lines: ['Ship Faster', 'with Production-Ready Tools', `from ${BRAND}`],
+  lines: ['استجابة أسرع • تصويب أذكى', 'سيطرة كاملة مع LOADRYX'],
   subtitle:
-    "Unleash your team's full potential with our curated suite of developer toolkits. Iterate quickly, ship reliably, and deliver effortless results.",
-  primaryCta: 'Get Started',
-  secondaryCta: 'Go to Forums',
+    'تقنيات ذكاء اصطناعي مصممة لرفع دقة التصويب، تثبيت الأداء، وتسريع الاستجابة داخل ألعاب الشوتر التنافسية.',
+  primaryCta: 'تصفّح المنتجات',
+}
+
+export const WHY = {
+  title: 'طريقة التفعيل',
+  subtitle:
+    'من اختيار المنتج إلى التفعيل، تمر التجربة بخطوات واضحة وسريعة، مع إرشادات مباشرة ودعم يساعدك بعد الشراء.',
 }
 
 export const FEATURES: FeatureCard[] = [
   {
-    icon: 'shield',
-    title: 'Reliable Tools',
+    icon: 'performance',
+    title: 'أداء ثابت داخل اللعب',
     description:
-      'Built with battle-tested patterns. Every toolkit ships with rigorous testing and a stability guarantee.',
+      'تجربة أكثر سلاسة واستقرارًا، تمنحك تحكمًا أفضل وراحة أكبر أثناء اللعب.',
   },
   {
-    icon: 'sparkles',
-    title: 'Leading Provider',
+    icon: 'support',
+    title: 'دعم فني',
     description:
-      'Established in 2017, we have grown into a trusted toolkit provider for product, design, and engineering teams.',
+      'فريق جاهز لمساعدتك في التفعيل والاستخدام، والرد على استفساراتك بأسرع وقت.',
   },
   {
-    icon: 'lock',
-    title: 'Curated Community',
+    icon: 'updates',
+    title: 'تحديثات مستمرة',
     description:
-      'Only verified members of our community get access to the full catalog and early-release tools.',
+      'تحسينات وتطوير دائم للحفاظ على أداء أفضل وتجربة لعب مستقرة.',
   },
   {
-    icon: 'code',
-    title: '100% In-House Built',
-    description:
-      'Unlike other vendors, we only ship tools we build ourselves — full control over quality, roadmap, and updates.',
+    icon: 'security',
+    title: 'أمان وخصوصية',
+    description: 'حماية بياناتك وتجربة استخدام آمنة وموثوقة.',
   },
   {
-    icon: 'thumb',
-    title: '24/7 Quality Support',
-    description:
-      'Our dedicated support team is available around the clock via forums, chat, and email.',
+    icon: 'activation',
+    title: 'تفعيل مباشر',
+    description: 'إعداد واضح وتشغيل مباشر بخطوات بسيطة وسريعة.',
   },
   {
-    icon: 'shield-coins',
-    title: 'Satisfaction Guarantee',
-    description:
-      'If a toolkit ever drops out of compliance, you get a full credit refund for the remaining time.',
+    icon: 'warranty',
+    title: 'ضمان الخدمة',
+    description: 'متابعة ودعم كامل لضمان عمل الخدمة بالشكل المطلوب.',
   },
 ]
+
+export const FAQ: FaqItem[] = [
+  {
+    question: 'هل الخدمة آمنة على الحساب والجهاز؟',
+    answer:
+      'الخدمة تعمل من خلال الكمبيوتر باستخدام الذكاء الاصطناعي لتحليل الصورة القادمة من كرت الكابتشر، ولا يتم تثبيت أي شيء داخل الكونسول أو تعديل ملفات اللعبة.',
+  },
+  {
+    question: 'هل يتم تثبيت شيء على الكونسول؟',
+    answer:
+      'لا، الخدمة لا تتطلب تثبيت ملفات على الكونسول، ولا تعدّل على النظام أو اللعبة بشكل مباشر.',
+  },
+  {
+    question: 'هل التوصيل متاح لجميع المدن؟',
+    answer:
+      'نعم، التوصيل متاح لجميع مدن المملكة، ويتم تجهيز الشحنة خلال 24 ساعة عمل بعد تأكيد الطلب.',
+  },
+  {
+    question: 'كيف أتتبع طلبي؟',
+    answer:
+      'بعد تأكيد الطلب، تصلك رسالة تحتوي على رقم التتبع لمتابعة الشحنة عبر موقع شركة الشحن.',
+  },
+  {
+    question: 'ما هي طرق الدفع المتاحة؟',
+    answer:
+      'نقبل مدى، VISA، Mastercard، Apple Pay، STC Pay، إضافة إلى التقسيط عبر Tabby وTamara.',
+  },
+  {
+    question: 'هل يمكن إلغاء أو تعديل الطلب بعد تأكيده؟',
+    answer:
+      'يمكن الإلغاء أو التعديل خلال أول 30 دقيقة من تأكيد الطلب. بعد ذلك يدخل الطلب مرحلة التجهيز ولا يمكن تعديله.',
+  },
+  {
+    question: 'ما هي متطلبات تشغيل الخدمة؟',
+    answer:
+      'تحتاج إلى جهاز PC أو لابتوب بنظام Windows 10 / 11، معالج Intel أو AMD من الجيل الثامن أو أعلى، وكرت شاشة Nvidia، ويفضل RTX 2080 أو أعلى.',
+  },
+  {
+    question: 'ما هي كروت الكابتشر المدعومة؟',
+    answer:
+      'تدعم الخدمة Elgato 4K X / 4K Pro / HD60 X / HD60 S+ / 4K60 Pro MK.2، بالإضافة إلى Avermedia Live Gamer HD 2 وUltra.',
+  },
+  {
+    question: 'كيف تتم آلية التركيب؟',
+    answer:
+      'يتم ربط الكونسول بالكمبيوتر عبر كرت الكابتشر لنقل الصورة، ثم تهيئة النظام وضبط الإعدادات للحصول على تجربة سلسة ومستقرة.',
+  },
+  {
+    question: 'كم يستغرق تجهيز الخدمة؟',
+    answer: 'عادة يتم تجهيز الخدمة خلال 2 إلى 3 ساعات بعد تحديد الموعد.',
+  },
+]
+
+export const CONTACT = {
+  title: 'تواصل معنا',
+  subtitle:
+    'فريقنا جاهز للرد على استفساراتك ومساعدتك في اختيار الخدمة المناسبة.',
+  channels: [
+    {
+      kind: 'whatsapp',
+      label: 'واتساب',
+      value: '+966 57 353 4407',
+      href: 'https://wa.me/966573534407',
+    },
+    {
+      kind: 'call',
+      label: 'اتصال مباشر',
+      value: '+966 57 353 4407',
+      href: 'tel:+966573534407',
+    },
+  ] satisfies ContactChannel[],
+}
 
 /* -------------------------------------------------------------------------- */
 /* Products — a legal digital gaming-tools / player-assistance catalogue.     */

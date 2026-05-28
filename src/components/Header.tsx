@@ -1,14 +1,18 @@
 import { useEffect, useState } from 'react'
 import { NAV_LINKS } from '../data/content'
-import { NimbusMark } from './icons'
+
+const LR_LOGO_SRC =
+  'https://res.cloudinary.com/dmp1fo2j4/image/upload/v1779955949/LR_logo_vilxah.svg'
 
 /**
- * Per teardown §5:
+ * Per teardown §5 (container/animation preserved verbatim):
  *  - Wrapper is fixed, full width, px-2
  *  - Empty `absolute inset-0` pill div takes border / glass / bg / narrower
  *    max-width on scrollY > 12, with a 600ms transition.
  *  - Content row holds the logo, links, CTA — independent of the pill.
  *  - Link hover is just a fast (150ms) color change, no underline or glow.
+ *
+ * RTL: dir="rtl" puts the logo on the right, links centered, CTA on the left.
  */
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
@@ -21,7 +25,7 @@ export function Header() {
   }, [])
 
   return (
-    <nav className="fixed z-50 w-full px-2">
+    <nav dir="rtl" className="font-ar fixed z-50 w-full px-2">
       {/* PILL backdrop — empty, transitions on scroll */}
       <div
         aria-hidden
@@ -41,13 +45,13 @@ export function Header() {
         ].join(' ')}
       >
         <div className="relative flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">
-          <a
-            href="#"
-            aria-label="home"
-            className="flex items-center space-x-2 text-white"
-          >
-            <NimbusMark size={32} />
-            <span className="sr-only">NIMBUS</span>
+          <a href="#" aria-label="LOADRYX" className="flex items-center text-white">
+            <img
+              src={LR_LOGO_SRC}
+              alt="LOADRYX"
+              className="h-8 w-auto select-none"
+              draggable={false}
+            />
           </a>
 
           {/* desktop nav links — flat, fast color hover */}
@@ -67,8 +71,8 @@ export function Header() {
           </div>
 
           <div className="hidden lg:flex lg:gap-3 relative z-20">
-            <a href="#cta" className="pill-btn pill-btn-primary text-sm">
-              Get Started
+            <a href="#contact" className="pill-btn pill-btn-primary text-sm">
+              تواصل معنا
             </a>
           </div>
         </div>

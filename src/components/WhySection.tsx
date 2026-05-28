@@ -1,21 +1,21 @@
-import { BRAND, FEATURES } from '../data/content'
+import { FEATURES, WHY } from '../data/content'
 import {
-  CodeIcon,
-  LockIcon,
-  ShieldCoinsIcon,
-  ShieldIcon,
-  SparklesIcon,
-  ThumbIcon,
+  ActivationIcon,
+  PerformanceIcon,
+  SecurityIcon,
+  SupportIcon,
+  UpdatesIcon,
+  WarrantyIcon,
 } from './icons'
 import type { FeatureCard } from '../types/content'
 
 const ICONS: Record<FeatureCard['icon'], React.FC<React.SVGProps<SVGSVGElement>>> = {
-  shield: ShieldIcon,
-  sparkles: SparklesIcon,
-  lock: LockIcon,
-  code: CodeIcon,
-  thumb: ThumbIcon,
-  'shield-coins': ShieldCoinsIcon,
+  performance: PerformanceIcon,
+  support: SupportIcon,
+  updates: UpdatesIcon,
+  security: SecurityIcon,
+  activation: ActivationIcon,
+  warranty: WarrantyIcon,
 }
 
 /**
@@ -83,15 +83,14 @@ function FeatureIcon({
 
 export function WhySection() {
   return (
-    <section className="py-16 md:py-32 dark:bg-transparent">
+    <section dir="rtl" className="font-ar py-16 md:py-32 dark:bg-transparent">
       <div className="mx-auto max-w-7xl px-6">
         <header className="text-center">
-          <h2 className="text-balance text-4xl font-semibold lg:text-5xl">
-            Why {BRAND}?
+          <h2 className="font-ar-display text-balance text-4xl font-semibold lg:text-5xl">
+            {WHY.title}
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-white/60">
-            Our toolkits offer unparalleled advantages with industry-leading
-            technology and dedicated support.
+            {WHY.subtitle}
           </p>
         </header>
 
@@ -105,7 +104,7 @@ export function WhySection() {
               >
                 <div className="relative z-10 grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 pb-3">
                   <FeatureIcon Icon={Icon} />
-                  <h3 className="mt-6 font-bold pb-3 group-hover:text-[var(--color-primary)] transition-colors duration-300">
+                  <h3 className="font-ar-display mt-6 font-bold pb-3 group-hover:text-[var(--color-primary)] transition-colors duration-300">
                     {feat.title}
                   </h3>
                   <p className="text-sm text-white/55 group-hover:text-white transition-colors duration-300">

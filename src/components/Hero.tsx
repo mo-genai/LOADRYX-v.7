@@ -18,7 +18,7 @@ export function Hero() {
   const titleContainerRef = useRef<HTMLDivElement>(null)
 
   return (
-    <section className="relative">
+    <section dir="rtl" className="font-ar relative">
       <div className="relative pt-24 sm:pt-32 lg:pt-40 pb-12 sm:pb-16 lg:pb-32">
         {/* --------------- Layer 1+2: video frame, 75% width on lg+, side-masked --------------- */}
         <div className="absolute inset-0 -z-20 h-full lg:w-3/4 xl:w-3/4 2xl:w-3/4 mx-auto overflow-hidden">
@@ -99,7 +99,7 @@ export function Hero() {
           {/* Title wrapper — establishes coords + holds the ghost + the live overlay */}
           <div
             ref={titleContainerRef}
-            className="relative mt-8"
+            className="font-ar-display relative mt-8"
             style={{ textAlign: 'center', width: '100%' }}
           >
             {/* ---- LAYER A: invisible weight-900 ghost (reserves max-width so the live letters don't shift) ---- */}
@@ -152,11 +152,8 @@ export function Hero() {
             className="mt-10 flex items-center justify-center gap-3 animate-fade-in"
             style={{ animationDelay: '0.55s' }}
           >
-            <a href="#cta" className="pill-btn pill-btn-primary">
+            <a href="#products" className="pill-btn pill-btn-primary">
               {HERO.primaryCta}
-            </a>
-            <a href="#forums" className="pill-btn pill-btn-ghost">
-              {HERO.secondaryCta}
             </a>
           </div>
         </div>
