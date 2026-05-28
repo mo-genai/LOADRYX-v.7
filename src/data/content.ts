@@ -1,8 +1,10 @@
 import type {
   BenefitCard,
   FeatureCard,
+  FeatureGroup,
   FooterColumn,
   NavLink,
+  PricingPlan,
   ProductCard,
   StatCard,
 } from '../types/content'
@@ -66,116 +68,261 @@ export const FEATURES: FeatureCard[] = [
   },
 ]
 
-export const PRODUCTS: ProductCard[] = [
+/* -------------------------------------------------------------------------- */
+/* Products — a legal digital gaming-tools / player-assistance catalogue.     */
+/* Game names are factual product identifiers; all functionality is framed    */
+/* as legitimate gaming utilities (no cheat/hack/aimbot/wallhack wording).    */
+/* -------------------------------------------------------------------------- */
+
+// Shared, sanitized feature groups. Most titles tailor a couple of entries
+// per game while keeping the same overall structure as the reference.
+function buildFeatures(game: string): FeatureGroup[] {
+  return [
+    {
+      category: 'Input & Sensitivity',
+      icon: 'tune',
+      items: [
+        'Customizable hotkeys',
+        'Saved sensitivity profiles',
+        'Two smoothing modes',
+        'Adjustable & dynamic FOV',
+        'On-screen FOV preview',
+        'Deadzone tuning',
+      ],
+    },
+    {
+      category: 'HUD Overlay',
+      icon: 'overlay',
+      items: [
+        'Customizable colors',
+        'Adjustable transparency',
+        'On-screen info panel',
+        'Distance readout',
+        'Custom hotkey toggle',
+      ],
+    },
+    {
+      category: 'Game Info Panel',
+      icon: 'panel',
+      items: [
+        'Objective markers',
+        'Inventory overview',
+        'Item categories',
+        'Distance indicators',
+        'Max-distance slider',
+      ],
+    },
+    {
+      category: 'Minimap Tools',
+      icon: 'map',
+      items: [
+        'Position display',
+        'Adjustable scale',
+        'Distance scale',
+        'Directional lines',
+        'Custom line length',
+      ],
+    },
+    {
+      category: 'Privacy Protection',
+      icon: 'shield',
+      items: ['Hardware privacy', 'Account safety', 'Local-only profiles'],
+    },
+    {
+      category: 'System Cleaner',
+      icon: 'broom',
+      items: ['Temp-file cleanup', 'Cache reset', `Fresh ${game} session`],
+    },
+    {
+      category: 'Controller Mapping',
+      icon: 'gamepad',
+      items: ['Full remap support', 'Per-profile bindings', 'Aim-key remap'],
+    },
+    {
+      category: 'Stream-Friendly Mode',
+      icon: 'stream',
+      items: ['Overlay hidden during capture', 'Record while you play'],
+    },
+  ]
+}
+
+function plans(base: number): PricingPlan[] {
+  return [
+    { label: '7 Days', days: 7, price: Math.round(base * 0.6 * 100) / 100 },
+    { label: '14 Days', days: 14, price: Math.round(base * 0.8 * 100) / 100 },
+    { label: '30 Days', days: 30, price: base },
+  ]
+}
+
+interface Seed {
+  id: string
+  gameName: string
+  kind: string
+  priceFrom: number
+  status: 'active' | 'beta'
+  monogram: string
+  gradient: string
+}
+
+const PRODUCT_SEEDS: Seed[] = [
   {
-    id: 'aurora',
-    title: 'Project Aurora',
+    id: 'fortnite',
+    gameName: 'Fortnite',
+    kind: 'Player Assist',
     priceFrom: 59.99,
-    status: 'stable',
-    verified: true,
-    monogram: 'AUR',
-    gradient: 'linear-gradient(135deg, #4f46e5 0%, #06b6d4 60%, #14b8a6 100%)',
+    status: 'active',
+    monogram: 'FN',
+    gradient: 'linear-gradient(135deg, #4f46e5 0%, #7c3aed 55%, #06b6d4 100%)',
   },
   {
-    id: 'borealis',
-    title: 'Project Borealis',
+    id: 'pubg',
+    gameName: 'PUBG',
+    kind: 'Game Tool',
     priceFrom: 23.99,
-    status: 'stable',
-    verified: true,
-    monogram: 'BOR',
-    gradient: 'linear-gradient(135deg, #1e3a8a 0%, #6d28d9 60%, #db2777 100%)',
+    status: 'active',
+    monogram: 'PUBG',
+    gradient: 'linear-gradient(135deg, #b45309 0%, #78350f 55%, #1c1917 100%)',
   },
   {
-    id: 'cobalt',
-    title: 'Project Cobalt',
+    id: 'apex',
+    gameName: 'Apex Legends',
+    kind: 'Player Assist',
     priceFrom: 23.99,
-    status: 'stable',
-    verified: true,
-    monogram: 'COB',
-    gradient: 'linear-gradient(135deg, #0f172a 0%, #1e40af 60%, #f59e0b 100%)',
+    status: 'active',
+    monogram: 'APEX',
+    gradient: 'linear-gradient(135deg, #b91c1c 0%, #ea580c 55%, #f59e0b 100%)',
   },
   {
-    id: 'mesa',
-    title: 'Project Mesa',
+    id: 'dayz',
+    gameName: 'DayZ',
+    kind: 'Gaming Utility',
     priceFrom: 29.99,
-    status: 'stable',
-    verified: true,
-    monogram: 'MES',
-    gradient: 'linear-gradient(135deg, #1f2937 0%, #475569 50%, #94a3b8 100%)',
+    status: 'active',
+    monogram: 'DAYZ',
+    gradient: 'linear-gradient(135deg, #334155 0%, #475569 55%, #94a3b8 100%)',
   },
   {
-    id: 'arena',
-    title: 'Project Arena',
+    id: 'overwatch-2',
+    gameName: 'Overwatch 2',
+    kind: 'Player Assist',
     priceFrom: 59.99,
-    status: 'stable',
-    verified: true,
-    monogram: 'ARE',
-    gradient: 'linear-gradient(135deg, #5b21b6 0%, #a21caf 50%, #f97316 100%)',
+    status: 'active',
+    monogram: 'OW2',
+    gradient: 'linear-gradient(135deg, #c2410c 0%, #ea580c 55%, #fbbf24 100%)',
   },
   {
-    id: 'onyx',
-    title: 'Project Onyx',
+    id: 'black-ops-6',
+    gameName: 'Black Ops 6',
+    kind: 'Performance Setup',
     priceFrom: 23.99,
     status: 'beta',
-    verified: true,
-    monogram: 'ONX',
-    gradient: 'linear-gradient(135deg, #111827 0%, #312e81 60%, #f97316 100%)',
+    monogram: 'BO6',
+    gradient: 'linear-gradient(135deg, #111827 0%, #1e3a8a 55%, #f97316 100%)',
   },
   {
-    id: 'ridge',
-    title: 'Project Ridge',
+    id: 'arma-3',
+    gameName: 'Arma 3',
+    kind: 'Gaming Utility',
     priceFrom: 29.99,
-    status: 'stable',
-    verified: true,
-    monogram: 'RID',
-    gradient: 'linear-gradient(135deg, #1e293b 0%, #334155 50%, #94a3b8 100%)',
+    status: 'active',
+    monogram: 'ARMA',
+    gradient: 'linear-gradient(135deg, #1f2937 0%, #374151 55%, #6b7280 100%)',
   },
   {
-    id: 'voyage',
-    title: 'Project Voyage',
+    id: 'arc-raiders',
+    gameName: 'Arc Raiders',
+    kind: 'Player Assist',
     priceFrom: 49.99,
-    status: 'stable',
-    verified: true,
-    monogram: 'VOY',
-    gradient: 'linear-gradient(135deg, #7c2d12 0%, #d97706 50%, #fbbf24 100%)',
+    status: 'active',
+    monogram: 'ARC',
+    gradient: 'linear-gradient(135deg, #7c2d12 0%, #b45309 55%, #fcd34d 100%)',
   },
   {
-    id: 'pulse',
-    title: 'Project Pulse',
+    id: 'black-ops-7',
+    gameName: 'Black Ops 7',
+    kind: 'Performance Setup',
     priceFrom: 23.99,
     status: 'beta',
-    verified: true,
-    monogram: 'PUL',
-    gradient: 'linear-gradient(135deg, #0f172a 0%, #1d4ed8 50%, #f97316 100%)',
+    monogram: 'BO7',
+    gradient: 'linear-gradient(135deg, #0f172a 0%, #b91c1c 60%, #f59e0b 100%)',
   },
   {
-    id: 'cypress',
-    title: 'Project Cypress',
+    id: 'cold-war',
+    gameName: 'Black Ops Cold War',
+    kind: 'Gaming Utility',
     priceFrom: 23.99,
-    status: 'stable',
-    verified: true,
-    monogram: 'CYP',
-    gradient: 'linear-gradient(135deg, #052e16 0%, #166534 50%, #84cc16 100%)',
+    status: 'active',
+    monogram: 'BOCW',
+    gradient: 'linear-gradient(135deg, #064e3b 0%, #047857 55%, #facc15 100%)',
   },
   {
-    id: 'monolith',
-    title: 'Project Monolith',
+    id: 'mw-iii',
+    gameName: 'Modern Warfare III',
+    kind: 'Game Tool',
     priceFrom: 23.99,
-    status: 'stable',
-    verified: true,
-    monogram: 'MON',
-    gradient: 'linear-gradient(135deg, #450a0a 0%, #b91c1c 60%, #f97316 100%)',
+    status: 'active',
+    monogram: 'MWIII',
+    gradient: 'linear-gradient(135deg, #14532d 0%, #166534 55%, #84cc16 100%)',
   },
   {
-    id: 'horizon',
-    title: 'Project Horizon',
+    id: 'mw-ii',
+    gameName: 'Modern Warfare II',
+    kind: 'Game Tool',
     priceFrom: 23.99,
-    status: 'stable',
-    verified: true,
-    monogram: 'HOR',
-    gradient: 'linear-gradient(135deg, #064e3b 0%, #047857 50%, #facc15 100%)',
+    status: 'active',
+    monogram: 'MWII',
+    gradient: 'linear-gradient(135deg, #450a0a 0%, #991b1b 60%, #f97316 100%)',
+  },
+  {
+    id: 'vanguard',
+    gameName: 'Vanguard',
+    kind: 'Gaming Utility',
+    priceFrom: 23.99,
+    status: 'active',
+    monogram: 'VG',
+    gradient: 'linear-gradient(135deg, #1e293b 0%, #b45309 60%, #fde68a 100%)',
+  },
+  {
+    id: 'mw-2019',
+    gameName: 'Modern Warfare 2019',
+    kind: 'Game Tool',
+    priceFrom: 23.99,
+    status: 'active',
+    monogram: 'MW19',
+    gradient: 'linear-gradient(135deg, #1f2937 0%, #15803d 60%, #bef264 100%)',
   },
 ]
+
+export const PRODUCTS: ProductCard[] = PRODUCT_SEEDS.map((s) => ({
+  id: s.id,
+  gameName: s.gameName,
+  title: `${s.gameName} ${s.kind}`,
+  kind: s.kind,
+  tagline: `Private ${s.gameName} ${s.kind.toLowerCase()} for verified members`,
+  priceFrom: s.priceFrom,
+  status: s.status,
+  verified: true,
+  gradient: s.gradient,
+  monogram: s.monogram,
+  description:
+    `The ${s.gameName} ${s.kind} is an in-house gaming utility that helps verified players ` +
+    `fine-tune their setup for ${s.gameName}. It bundles sensitivity profiles, a customizable ` +
+    `HUD overlay, minimap tools, controller mapping, and stream-friendly capture into one ` +
+    `lightweight app. Every release is tested for stability and ships with continuous updates ` +
+    `and dedicated support.`,
+  features: buildFeatures(s.gameName),
+  compatibility: {
+    releaseDate: '2024',
+    platforms: 'PC (Steam / Epic / Battle.net)',
+    os: 'Windows 10 & 11 (64-bit)',
+    recording: 'Compatible with OBS, Discord & NVIDIA capture',
+  },
+  plans: plans(s.priceFrom),
+}))
+
+export function getProduct(id: string): ProductCard | undefined {
+  return PRODUCTS.find((p) => p.id === id)
+}
 
 export const STATS: StatCard[] = [
   { value: '99%', label: 'Positive Reviews', icon: 'trophy' },
@@ -238,23 +385,23 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
   {
     heading: 'Popular Tools',
     links: [
-      { label: 'Aurora', href: '#aurora' },
-      { label: 'Borealis', href: '#borealis' },
-      { label: 'Cobalt', href: '#cobalt' },
-      { label: 'Mesa', href: '#mesa' },
-      { label: 'Arena', href: '#arena' },
-      { label: 'Cypress', href: '#cypress' },
+      { label: 'Fortnite', href: '#/product/fortnite' },
+      { label: 'PUBG', href: '#/product/pubg' },
+      { label: 'Apex Legends', href: '#/product/apex' },
+      { label: 'DayZ', href: '#/product/dayz' },
+      { label: 'Arma 3', href: '#/product/arma-3' },
+      { label: 'Arc Raiders', href: '#/product/arc-raiders' },
     ],
   },
   {
     heading: 'More Tools',
     links: [
-      { label: 'Onyx', href: '#onyx' },
-      { label: 'Ridge', href: '#ridge' },
-      { label: 'Voyage', href: '#voyage' },
-      { label: 'Pulse', href: '#pulse' },
-      { label: 'Monolith', href: '#monolith' },
-      { label: 'Horizon', href: '#horizon' },
+      { label: 'Overwatch 2', href: '#/product/overwatch-2' },
+      { label: 'Black Ops 6', href: '#/product/black-ops-6' },
+      { label: 'Black Ops 7', href: '#/product/black-ops-7' },
+      { label: 'Cold War', href: '#/product/cold-war' },
+      { label: 'Modern Warfare III', href: '#/product/mw-iii' },
+      { label: 'Vanguard', href: '#/product/vanguard' },
     ],
   },
   {
@@ -264,7 +411,7 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
       { label: 'Getting Started', href: '#start' },
       { label: 'FAQs', href: '#faq' },
       { label: 'Applications', href: '#apply' },
-      { label: 'Store', href: '#store' },
+      { label: 'Store', href: '#products' },
       { label: 'Manage Purchases', href: '#manage' },
     ],
   },

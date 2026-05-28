@@ -1,13 +1,10 @@
 import { AmbientCanvas } from './components/AmbientCanvas'
-import { BenefitsSection } from './components/BenefitsSection'
-import { CtaSection } from './components/CtaSection'
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
-import { Hero } from './components/Hero'
-import { HowItWorks } from './components/HowItWorks'
-import { ProductsSection } from './components/ProductsSection'
-import { TrustedSection } from './components/TrustedSection'
-import { WhySection } from './components/WhySection'
+import { HomePage } from './pages/HomePage'
+import { ProductDetailPage } from './pages/ProductDetailPage'
+import { CheckoutPage } from './pages/CheckoutPage'
+import { useRoute } from './lib/useRoute'
 
 const PAGE_BOTTOM_MASK =
   'linear-gradient(to bottom, black 0%, black 92%, rgba(0,0,0,.35) 100%)'
@@ -16,18 +13,16 @@ const PAGE_BOTTOM_MASK =
  * The canvas is mounted INSIDE the masked wrapper, as a sibling that comes
  * BEFORE <main> in the DOM. This puts it in the wrapper's stacking context
  * at z-index: auto, which means:
- *
  *   - It paints ABOVE the hero's -z-20 video and -z-10 vignettes
- *     (so dots are visible over the dark vignette corners)
- *   - It paints BELOW the hero's z-auto content (so the title sits on top)
- *   - The wrapper's bottom mask still applies to it — dots fade smoothly
- *     into the page background as you approach the footer
+ *   - It paints BELOW the hero's z-auto content
  *
- * AmbientCanvas itself is `position: fixed` so memory stays viewport-sized
- * regardless of page length. CSS mask-image does NOT create a containing
- * block for fixed descendants, so the canvas stays anchored to the viewport.
+ * A tiny hash router swaps the page inside <main>. Product detail + checkout
+ * pages get the same chrome (navbar, ambient background, footer) as the home
+ * page, but only the Products flow is new — every other section is untouched.
  */
 function App() {
+  const route = useRoute()
+
   return (
     <>
       <Header />
@@ -40,14 +35,19 @@ function App() {
       >
         <AmbientCanvas />
         <main className="overflow-hidden w-full">
-          <Hero />
-          <WhySection />
-          <ProductsSection />
-          <TrustedSection />
-          <BenefitsSection />
-          <HowItWorks />
-          <CtaSection />
-          <Footer />
+          {route.name === 'home' && <HomePage />}
+          {route.name === 'product' && (
+            <>
+              <ProductDetailPage id={route.id} />
+              <Footer />
+            </>
+          )}
+          {route.name === 'checkout' && (
+            <>
+              <CheckoutPage id={route.id} days={route.days} />
+              <Footer />
+            </>
+          )}
         </main>
       </div>
     </>
