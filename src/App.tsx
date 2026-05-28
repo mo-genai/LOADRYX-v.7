@@ -10,7 +10,7 @@ import { TrustedSection } from './components/TrustedSection'
 import { WhySection } from './components/WhySection'
 
 const PAGE_BOTTOM_MASK =
-  'linear-gradient(to bottom, black 0%, black 80%, transparent 100%)'
+  'linear-gradient(to bottom, black 0%, black 92%, rgba(0,0,0,.35) 100%)'
 
 /**
  * The canvas is mounted INSIDE the masked wrapper, as a sibling that comes
