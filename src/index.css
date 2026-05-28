@@ -2,12 +2,12 @@
 
 /* ---------- Tailwind v4 theme tokens used by the teardown ---------- */
 @theme {
-  --color-background: #0f1218;           /* matches proofcore's <meta theme-color> for dark mode */
+  --color-background: #00040A;           /* matches proofcore's <meta theme-color> for dark mode */
   --color-foreground: #f5f5f7;
   --color-muted-foreground: rgba(245, 245, 247, 0.62);
-  --color-card: rgba(255, 255, 255, 0.02);
+  --color-card: rgba(255, 255, 255, 0.018);
   --color-card-foreground: #f5f5f7;
-  --color-border: rgba(255, 255, 255, 0.10);
+  --color-border: rgba(255, 255, 255, 0.08);
   --color-primary: #bcd0ff;              /* soft blue glow used for hover shadow + border */
   --color-primary-foreground: #0f1218;
   --color-accent-foreground: #ffffff;
