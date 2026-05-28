@@ -38,6 +38,7 @@ body,
    render dots ABOVE it without being covered by #root / body. */
 html {
   background: var(--color-background);
+  scroll-behavior: smooth;
 }
 body,
 #root {
@@ -49,16 +50,13 @@ body {
 }
 
 /* ---------- Arabic typography (home only) ----------
-   .font-ar       → IBM Plex Sans Arabic for body / UI text
-   .font-ar-display → Noto Kufi Arabic for headings + hero
-   Applied on the RTL home wrapper + header so product/checkout pages keep
-   their original Latin typography. */
+   IBM Plex Sans Arabic is used for ALL home text and headings — clean, calm,
+   and consistent. Applied on the RTL home sections + header so the
+   product/checkout pages keep their original Latin typography. */
 .font-ar,
-.font-ar :where(p, span, a, li, button, h1, h2, h3, h4, h5, h6, summary, input, label) {
-  font-family: 'IBM Plex Sans Arabic', 'Manrope', ui-sans-serif, system-ui, sans-serif;
-}
+.font-ar :where(p, span, a, li, button, h1, h2, h3, h4, h5, h6, summary, input, label),
 .font-ar-display {
-  font-family: 'Noto Kufi Arabic', 'IBM Plex Sans Arabic', ui-sans-serif, system-ui, sans-serif;
+  font-family: 'IBM Plex Sans Arabic', 'Manrope', ui-sans-serif, system-ui, sans-serif;
 }
 
 /* ---------- Hero load animation (for non-title sub-elements only — title uses VariableProximity) ---------- */

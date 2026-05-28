@@ -41,6 +41,12 @@ export const VariableProximity = forwardRef<HTMLSpanElement, Props>(
     const mouseRef = useRef({ x: -9999, y: -9999 })
     const lastRef = useRef({ x: -1, y: -1 })
 
+    // Arabic is cursive — splitting into letters breaks the joining. For Arabic
+    // we keep whole words intact and drive a soft "spotlight" (opacity + scale +
+    // glow) per word instead of variable weight, preserving the interactive feel.
+    const isArabic = /[؀-ۿ]/.test(label)
+    const AR_BASE_OPACITY = 0.7
+
     const axes = useMemo(() => {
       const parse = (s: string) =>
         new Map(
@@ -89,7 +95,13 @@ export const VariableProximity = forwardRef<HTMLSpanElement, Props>(
           const d = Math.hypot(x - cx, y - cy)
 
           if (d >= radius) {
-            el.style.fontVariationSettings = fromFontVariationSettings
+            if (isArabic) {
+              el.style.opacity = String(AR_BASE_OPACITY)
+              el.style.transform = 'scale(1)'
+              el.style.textShadow = 'none'
+            } else {
+              el.style.fontVariationSettings = fromFontVariationSettings
+            }
             continue
           }
           const norm = Math.max(0, Math.min(1, 1 - d / radius))
@@ -100,12 +112,18 @@ export const VariableProximity = forwardRef<HTMLSpanElement, Props>(
                 ? Math.exp(-((d / (radius / 2)) ** 2) / 2)
                 : norm
 
-          el.style.fontVariationSettings = axes
-            .map(
-              (a) =>
-                `'${a.axis}' ${a.fromValue + (a.toValue - a.fromValue) * f}`,
-            )
-            .join(', ')
+          if (isArabic) {
+            el.style.opacity = String(AR_BASE_OPACITY + (1 - AR_BASE_OPACITY) * f)
+            el.style.transform = `scale(${1 + 0.05 * f})`
+            el.style.textShadow = `0 0 ${22 * f}px rgba(188,208,255,${0.5 * f})`
+          } else {
+            el.style.fontVariationSettings = axes
+              .map(
+                (a) =>
+                  `'${a.axis}' ${a.fromValue + (a.toValue - a.fromValue) * f}`,
+              )
+              .join(', ')
+          }
         }
       }
       id = requestAnimationFrame(tick)
@@ -115,12 +133,8 @@ export const VariableProximity = forwardRef<HTMLSpanElement, Props>(
         window.removeEventListener('mousemove', onMove)
         window.removeEventListener('touchmove', onMove)
       }
-    }, [axes, fromFontVariationSettings, radius, falloff, containerRef])
+    }, [axes, fromFontVariationSettings, radius, falloff, containerRef, isArabic])
 
-    // Arabic is cursive: isolating each letter in its own inline-block box
-    // breaks the joining. For Arabic labels we keep whole words intact and
-    // drive the proximity weight per word, preserving the visual feel.
-    const isArabic = /[؀-ۿ]/.test(label)
     const words = label.split(' ')
     let i = 0
     return (
@@ -143,7 +157,10 @@ export const VariableProximity = forwardRef<HTMLSpanElement, Props>(
                     }}
                     style={{
                       display: 'inline-block',
-                      fontVariationSettings: fromFontVariationSettings,
+                      opacity: AR_BASE_OPACITY,
+                      transition:
+                        'opacity 0.25s ease, transform 0.25s ease, text-shadow 0.25s ease',
+                      willChange: 'opacity, transform',
                     }}
                     aria-hidden
                   >

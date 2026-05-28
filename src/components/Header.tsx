@@ -24,6 +24,47 @@ export function Header() {
     return () => window.removeEventListener('scroll', on)
   }, [])
 
+  // "تواصل معنا" should reach the contact section from anywhere. We use an
+  // instant jump (not smooth): the ambient canvas + hero video keep the layout
+  // reflowing, which cancels long smooth-scroll animations on this page.
+  const goToContact = (e: React.MouseEvent) => {
+    e.preventDefault()
+    const here = document.getElementById('contact')
+    if (here) {
+      here.scrollIntoView({ behavior: 'instant', block: 'start' })
+      return
+    }
+    // On another page: route home, then land on the contact section. The page
+    // reflows as it mounts, so wait until the section's position is stable for
+    // two consecutive checks before jumping (an early jump would miss as
+    // content grows below it).
+    window.location.hash = '#/'
+    let tries = 0
+    let lastTop = -1
+    let stable = 0
+    const tick = () => {
+      const el = document.getElementById('contact')
+      if (el) {
+        const top = Math.round(el.getBoundingClientRect().top + window.scrollY)
+        if (top > 0 && top === lastTop) {
+          if (++stable >= 2) {
+            el.scrollIntoView({ behavior: 'instant', block: 'start' })
+            return
+          }
+        } else {
+          stable = 0
+          lastTop = top
+        }
+      }
+      if (tries++ > 80) {
+        el?.scrollIntoView({ behavior: 'instant', block: 'start' })
+        return
+      }
+      window.setTimeout(tick, 50)
+    }
+    window.setTimeout(tick, 50)
+  }
+
   return (
     <nav dir="rtl" className="font-ar fixed z-50 w-full px-2">
       {/* PILL backdrop — empty, transitions on scroll */}
@@ -71,7 +112,11 @@ export function Header() {
           </div>
 
           <div className="hidden lg:flex lg:gap-3 relative z-20">
-            <a href="#contact" className="pill-btn pill-btn-primary text-sm">
+            <a
+              href="#contact"
+              onClick={goToContact}
+              className="pill-btn pill-btn-primary text-sm"
+            >
               تواصل معنا
             </a>
           </div>

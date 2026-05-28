@@ -47,13 +47,11 @@ export function Hero() {
               playsInline
               preload="metadata"
               poster={HERO_POSTER_SRC}
-              className="relative h-full object-cover"
+              className="relative mx-auto h-full w-full object-cover"
                style={{
-                 width: '125%',
                  maxWidth: 'none',
                  minHeight: '100vh',
                  objectPosition: 'center center',
-                 transform: 'translateX(-12%)',
                  transformOrigin: 'center center',
               }}
             >
@@ -99,7 +97,7 @@ export function Hero() {
           {/* Title wrapper — establishes coords + holds the ghost + the live overlay */}
           <div
             ref={titleContainerRef}
-            className="font-ar-display relative mt-8"
+            className="font-ar-display font-bold relative mt-8"
             style={{ textAlign: 'center', width: '100%' }}
           >
             {/* ---- LAYER A: invisible weight-900 ghost (reserves max-width so the live letters don't shift) ---- */}
@@ -132,9 +130,8 @@ export function Hero() {
                     fromFontVariationSettings="'wght' 400"
                     toFontVariationSettings="'wght' 900"
                     containerRef={titleContainerRef}
-                    radius={140}
+                    radius={160}
                     falloff="gaussian"
-                    className="font-normal"
                   />
                 </div>
               ))}
@@ -142,7 +139,7 @@ export function Hero() {
           </div>
 
           <p
-            className="mx-auto mt-8 max-w-2xl text-base sm:text-lg text-white/70 animate-fade-in"
+            className="mx-auto mt-5 max-w-2xl text-base sm:text-lg text-white/70 animate-fade-in"
             style={{ animationDelay: '0.4s' }}
           >
             {HERO.subtitle}

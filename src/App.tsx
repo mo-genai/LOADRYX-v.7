@@ -2,6 +2,7 @@ import { AmbientCanvas } from './components/AmbientCanvas'
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { HomePage } from './pages/HomePage'
+import { ProductsPage } from './pages/ProductsPage'
 import { ProductDetailPage } from './pages/ProductDetailPage'
 import { CheckoutPage } from './pages/CheckoutPage'
 import { useRoute } from './lib/useRoute'
@@ -36,6 +37,12 @@ function App() {
         <AmbientCanvas />
         <main className="overflow-hidden w-full">
           {route.name === 'home' && <HomePage />}
+          {route.name === 'products' && (
+            <>
+              <ProductsPage />
+              <Footer />
+            </>
+          )}
           {route.name === 'product' && (
             <>
               <ProductDetailPage id={route.id} />

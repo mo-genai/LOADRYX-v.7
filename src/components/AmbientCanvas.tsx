@@ -113,6 +113,8 @@ export function AmbientCanvas() {
         'main section .max-w-6xl',
         // CTA inner block
         '#cta .relative.text-center',
+        // FAQ — mask the whole section so dots never sit behind the questions
+        '#faq',
         // Whole footer (text columns, brand block, social cluster)
         'footer',
       ]

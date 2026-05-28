@@ -174,13 +174,12 @@ export function GlobeIcon(p: Props) {
 /* round caps/joins, currentColor) so they read as a single family.           */
 /* -------------------------------------------------------------------------- */
 
-/* Stable in-game performance — speedometer holding steady */
+/* Stable in-game performance — steady speedometer */
 export function PerformanceIcon(p: Props) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" {...p}>
-      <path d="M5 17.5a8 8 0 1 1 14 0" />
-      <path d="M12 17.5 16 11" />
-      <circle cx="12" cy="17.5" r="1.1" fill="currentColor" stroke="none" />
+      <path d="M4 16.5a8 8 0 1 1 16 0" />
+      <path d="M12 16.5 15.5 12" />
     </svg>
   )
 }
@@ -189,10 +188,10 @@ export function PerformanceIcon(p: Props) {
 export function SupportIcon(p: Props) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" {...p}>
-      <path d="M4 13v-1a8 8 0 0 1 16 0v1" />
-      <path d="M4 13a2 2 0 0 1 2-2h1v6H6a2 2 0 0 1-2-2v-2Z" />
-      <path d="M20 13a2 2 0 0 0-2-2h-1v6h1a2 2 0 0 0 2-2v-2Z" />
-      <path d="M20 17v.5a3 3 0 0 1-3 3h-4" />
+      <path d="M5 13v-1a7 7 0 0 1 14 0v1" />
+      <rect x="3.5" y="13" width="3.2" height="5.2" rx="1.3" />
+      <rect x="17.3" y="13" width="3.2" height="5.2" rx="1.3" />
+      <path d="M19 18.2v.3a2.8 2.8 0 0 1-2.8 2.8H13" />
     </svg>
   )
 }
@@ -201,20 +200,20 @@ export function SupportIcon(p: Props) {
 export function UpdatesIcon(p: Props) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" {...p}>
-      <path d="M20 8a8 8 0 0 0-14.5-1" />
-      <path d="M4 16a8 8 0 0 0 14.5 1" />
-      <path d="M20 4v4h-4M4 20v-4h4" />
+      <path d="M4.5 9a7.5 7.5 0 0 1 12.7-2.6L20 9" />
+      <path d="M19.5 15a7.5 7.5 0 0 1-12.7 2.6L4 15" />
+      <path d="M20 4.5V9h-4.5" />
+      <path d="M4 19.5V15h4.5" />
     </svg>
   )
 }
 
-/* Security & privacy — shield with keyhole */
+/* Security & privacy — shield with check */
 export function SecurityIcon(p: Props) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" {...p}>
       <path d="M12 3 5 6v5c0 4.6 3 7.7 7 9 4-1.3 7-4.4 7-9V6l-7-3Z" />
-      <circle cx="12" cy="10.5" r="1.6" />
-      <path d="M12 12.1V15" />
+      <path d="m9 12 2 2 4-4" />
     </svg>
   )
 }
@@ -229,13 +228,13 @@ export function ActivationIcon(p: Props) {
   )
 }
 
-/* Service warranty — award medal with check */
+/* Service warranty — award medal */
 export function WarrantyIcon(p: Props) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" {...p}>
-      <circle cx="12" cy="9" r="6" />
-      <path d="m9.2 9 1.9 1.9L15 7.4" />
-      <path d="M8.7 14.3 7.3 21l4.7-2.6L16.7 21l-1.4-6.7" />
+      <circle cx="12" cy="9" r="5.5" />
+      <path d="m9.7 9 1.6 1.6L14.4 7.6" />
+      <path d="M8.8 13.8 7.4 20.5l4.6-2.5 4.6 2.5-1.4-6.7" />
     </svg>
   )
 }

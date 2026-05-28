@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 export type Route =
   | { name: 'home' }
+  | { name: 'products' }
   | { name: 'product'; id: string }
   | { name: 'checkout'; id: string; days?: number }
 
@@ -24,6 +25,9 @@ function parse(hash: string): Route {
   const h = hash.replace(/^#/, '')
   if (!h.startsWith('/')) return { name: 'home' }
   const parts = h.split('/').filter(Boolean) // ["product","fortnite"]
+  if (parts[0] === 'products') {
+    return { name: 'products' }
+  }
   if (parts[0] === 'product' && parts[1]) {
     return { name: 'product', id: decodeURIComponent(parts[1]) }
   }
