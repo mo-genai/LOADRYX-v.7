@@ -14,6 +14,15 @@ import type {
 export const BRAND = 'NIMBUS'
 export const BRAND_TAGLINE = 'Production-Ready Tools for Modern Teams'
 
+/** Display prices in Saudi Riyal. Base catalogue numbers are kept in USD. */
+const SAR_RATE = 3.75
+export function priceSAR(usd: number): number {
+  return Math.round(usd * SAR_RATE)
+}
+export function formatSAR(usd: number): string {
+  return `${priceSAR(usd).toLocaleString('en-US')} ريال`
+}
+
 export const NAV_LINKS: NavLink[] = [
   { label: 'الرئيسية', href: '#' },
   { label: 'المنتجات', href: '#products' },
@@ -28,7 +37,7 @@ export const HERO = {
 }
 
 export const WHY = {
-  title: 'طريقة التفعيل',
+  title: 'رحلة البدء',
   subtitle:
     'من اختيار المنتج إلى التفعيل، تمر التجربة بخطوات واضحة وسريعة، مع إرشادات مباشرة ودعم يساعدك بعد الشراء.',
 }

@@ -45,7 +45,7 @@ export const VariableProximity = forwardRef<HTMLSpanElement, Props>(
     // we keep whole words intact and drive a soft "spotlight" (opacity + scale +
     // glow) per word instead of variable weight, preserving the interactive feel.
     const isArabic = /[؀-ۿ]/.test(label)
-    const AR_BASE_OPACITY = 0.7
+    const AR_BASE_OPACITY = 0.88
 
     const axes = useMemo(() => {
       const parse = (s: string) =>

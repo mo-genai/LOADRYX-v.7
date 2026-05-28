@@ -1,51 +1,71 @@
-import { CheckCircleIcon } from './icons'
-import { ProductCover } from './ProductCover'
+import { formatSAR } from '../data/content'
+import { productImage } from '../data/productImages'
+import { ShieldCheckIcon } from './icons'
 import type { ProductCard as ProductCardType } from '../types/content'
 
 /**
- * Shared product card used by the home Products section and the full
- * Products page so both keep an identical design and grid cell.
+ * Product card — full cover photo on top, then game name (kept in English) and
+ * price in Saudi Riyal, with a verification shield + status dot (no text), and
+ * two actions: اشترِ (purchase) and استعراض (showcase / details).
  */
 export function ProductCard({ product: p }: { product: ProductCardType }) {
   const isBeta = p.status === 'beta'
+  const cover = productImage(p.id)
+
   return (
-    <a
-      href={`#/product/${p.id}`}
-      className="card overflow-hidden flex flex-col group"
-    >
-      <div className="relative aspect-[16/9] w-full">
-        <ProductCover product={p} />
-      </div>
+    <div dir="rtl" className="font-ar card p-3 flex flex-col">
+      <a
+        href={`#/product/${p.id}`}
+        className="group/cover relative block aspect-[4/3] w-full overflow-hidden rounded-xl"
+        aria-label={p.gameName}
+      >
+        {cover ? (
+          <img
+            src={cover}
+            alt={p.gameName}
+            loading="lazy"
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover/cover:scale-[1.04]"
+          />
+        ) : (
+          <div className="absolute inset-0" style={{ background: p.gradient }} />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent" />
+      </a>
 
-      <div className="p-6 flex-1 flex flex-col">
-        <h3 className="text-lg font-semibold group-hover:text-[var(--color-primary)] transition-colors">
-          {p.title}
+      <div className="flex items-start justify-between gap-3 px-1 pt-4">
+        <h3 className="text-lg font-semibold text-white" dir="ltr">
+          {p.gameName}
         </h3>
-        <p className="mt-3 text-xs text-white/55">Starting price</p>
-        <p className="mt-1 text-lg font-semibold">
-          from ${p.priceFrom.toFixed(2)}
-        </p>
-
-        <div className="mt-4 flex items-center gap-3 text-xs">
-          <span className="inline-flex items-center gap-1.5">
+        <div className="text-left">
+          <p className="whitespace-nowrap text-base font-bold text-white">
+            {formatSAR(p.priceFrom)}
+          </p>
+          <div className="mt-1 flex items-center justify-start gap-1.5">
+            <ShieldCheckIcon className="size-4 text-sky-400" />
             <span
               className={[
                 'inline-block h-2 w-2 rounded-full',
                 isBeta ? 'bg-amber-400' : 'bg-emerald-400',
               ].join(' ')}
             />
-            <span className="text-white/75">{isBeta ? 'Beta' : 'Active'}</span>
-          </span>
-          <span className="inline-flex items-center gap-1 text-white/75">
-            <CheckCircleIcon className="size-3.5 text-sky-400" />
-            Verified
-          </span>
+          </div>
         </div>
-
-        <span className="mt-5 pill-btn pill-btn-ghost w-full justify-center group-hover:bg-white/10">
-          View Details
-        </span>
       </div>
-    </a>
+
+      <div className="mt-4 flex gap-2">
+        <a
+          href={`#/checkout/${p.id}`}
+          className="pill-btn pill-btn-primary flex-1 justify-center text-sm"
+        >
+          اشترِ
+        </a>
+        <a
+          href={`#/product/${p.id}`}
+          className="pill-btn pill-btn-ghost flex-1 justify-center text-sm"
+        >
+          استعراض
+        </a>
+      </div>
+    </div>
   )
 }

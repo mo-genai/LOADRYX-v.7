@@ -19,10 +19,8 @@ const ICONS: Record<FeatureCard['icon'], React.FC<React.SVGProps<SVGSVGElement>>
 }
 
 /**
- * Card icon housing per teardown §7c — exact three-layer construction:
- *   1) 24px dotted grid using --color-border
- *   2) radial mask fading the grid toward the center
- *   3) 12px (size-12) icon plate with top-left border only, centered
+ * Clean icon housing — a subtle square grid that fades out radially, with the
+ * white line icon centered on top (no plate). Mirrors the reference look.
  */
 function FeatureIcon({
   Icon,
@@ -31,15 +29,14 @@ function FeatureIcon({
 }) {
   return (
     <div
-      className="group/icon relative mx-auto size-36 duration-200 rounded-md"
+      className="relative mx-auto grid size-24 place-items-center"
       style={
         {
           ['--color-border' as never]:
-            'color-mix(in oklab, white 15%, transparent)',
+            'color-mix(in oklab, white 12%, transparent)',
         } as React.CSSProperties
       }
     >
-      {/* Layer 1 — 24px grid */}
       <div
         aria-hidden
         className="absolute inset-0"
@@ -47,36 +44,14 @@ function FeatureIcon({
           backgroundImage:
             'linear-gradient(to right, var(--color-border) 1px, transparent 1px),\
              linear-gradient(to bottom, var(--color-border) 1px, transparent 1px)',
-          backgroundSize: '24px 24px',
+          backgroundSize: '18px 18px',
+          maskImage:
+            'radial-gradient(circle at center, black 0%, transparent 70%)',
+          WebkitMaskImage:
+            'radial-gradient(circle at center, black 0%, transparent 70%)',
         }}
       />
-      {/* Layer 2 — radial mask, transparent in center, --color-background at 75% */}
-      <div
-        aria-hidden
-        className="absolute inset-0"
-        style={{
-          background:
-            'radial-gradient(circle, transparent 0%, var(--color-background) 75%)',
-        }}
-      />
-      {/* Layer 3 — icon plate with top-left bordered corner */}
-      <div
-        className="absolute inset-0 m-auto flex size-12 items-center justify-center border-l border-t"
-        style={{
-          background: 'var(--color-background)',
-          borderColor: 'var(--color-border)',
-        }}
-      >
-        <div
-          className="aspect-square rounded-full p-2"
-          style={{
-            background:
-              'radial-gradient(closest-side, var(--color-background) 0%, var(--color-background) 60%, transparent 100%)',
-          }}
-        >
-          <Icon className="size-6 text-white" />
-        </div>
-      </div>
+      <Icon className="relative size-8 text-white" />
     </div>
   )
 }

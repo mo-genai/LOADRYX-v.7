@@ -12,7 +12,7 @@ const HERO_POSTER_SRC =
 const SIDE_MASK =
   'linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%)'
 
-const HERO_FONT_SIZE = 'clamp(1.875rem, 8vw, 5.25rem)'
+const HERO_FONT_SIZE = 'clamp(1.625rem, 5.5vw, 3.75rem)'
 
 export function Hero() {
   const titleContainerRef = useRef<HTMLDivElement>(null)
@@ -67,6 +67,14 @@ export function Hero() {
             }}
             aria-hidden
           />
+          {/* Layer 3b: uniform dim so the title/description stay legible over the video */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background: 'color-mix(in oklab, var(--color-background) 42%, transparent)',
+            }}
+            aria-hidden
+          />
         </div>
 
         {/* --------------- Layer 4: bottom-up radial vignette --------------- */}
@@ -97,7 +105,7 @@ export function Hero() {
           {/* Title wrapper — establishes coords + holds the ghost + the live overlay */}
           <div
             ref={titleContainerRef}
-            className="font-ar-display font-bold relative mt-8"
+            className="font-ar-display font-semibold relative mt-4"
             style={{ textAlign: 'center', width: '100%' }}
           >
             {/* ---- LAYER A: invisible weight-900 ghost (reserves max-width so the live letters don't shift) ---- */}
@@ -139,14 +147,14 @@ export function Hero() {
           </div>
 
           <p
-            className="mx-auto mt-5 max-w-2xl text-base sm:text-lg text-white/70 animate-fade-in"
+            className="mx-auto mt-6 max-w-xl text-base sm:text-lg text-white/70 animate-fade-in"
             style={{ animationDelay: '0.4s' }}
           >
             {HERO.subtitle}
           </p>
 
           <div
-            className="mt-10 flex items-center justify-center gap-3 animate-fade-in"
+            className="mt-8 flex items-center justify-center gap-3 animate-fade-in"
             style={{ animationDelay: '0.55s' }}
           >
             <a href="#products" className="pill-btn pill-btn-primary">

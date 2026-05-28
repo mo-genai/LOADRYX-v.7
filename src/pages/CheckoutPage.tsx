@@ -1,9 +1,19 @@
 import { useState } from 'react'
-import { getProduct } from '../data/content'
-import { ProductCover } from '../components/ProductCover'
+import { formatSAR, getProduct } from '../data/content'
+import { productImage } from '../data/productImages'
 import { CheckCircleIcon } from '../components/icons'
 
-const PAYMENT_METHODS = ['VISA', 'Mastercard', 'PayPal', 'Amex', 'Crypto']
+const PAYMENT_METHODS = [
+  'مدى',
+  'Apple Pay',
+  'STC Pay',
+  'VISA',
+  'Mastercard',
+  'Tabby',
+  'Tamara',
+]
+
+const planLabelAr = (days: number) => `اشتراك ${days} يوم`
 
 export function CheckoutPage({ id, days }: { id: string; days?: number }) {
   const product = getProduct(id)
@@ -16,38 +26,47 @@ export function CheckoutPage({ id, days }: { id: string; days?: number }) {
 
   if (!product) {
     return (
-      <section className="min-h-[70vh] grid place-items-center px-6 text-center">
+      <section
+        dir="rtl"
+        className="font-ar min-h-[70vh] grid place-items-center px-6 text-center"
+      >
         <div>
-          <h1 className="text-3xl font-semibold">Nothing to check out</h1>
-          <a href="#products" className="pill-btn pill-btn-primary mt-6 inline-flex">
-            Back to Products
+          <h1 className="font-ar-display text-3xl font-semibold">
+            لا يوجد ما يمكن شراؤه
+          </h1>
+          <a href="#/products" className="pill-btn pill-btn-primary mt-6 inline-flex">
+            العودة إلى المنتجات
           </a>
         </div>
       </section>
     )
   }
 
+  const cover = productImage(product.id)
   const plan = product.plans.find((p) => p.days === planDays) ?? product.plans[0]
 
   if (done) {
     return (
-      <section className="min-h-[80vh] grid place-items-center px-6 text-center pt-28">
+      <section
+        dir="rtl"
+        className="font-ar min-h-[80vh] grid place-items-center px-6 text-center pt-28"
+      >
         <div className="max-w-md">
           <div className="mx-auto grid size-16 place-items-center rounded-full bg-emerald-500/15">
             <CheckCircleIcon className="size-8 text-emerald-400" />
           </div>
-          <h1 className="mt-6 text-3xl font-semibold">Order confirmed</h1>
+          <h1 className="font-ar-display mt-6 text-3xl font-semibold">
+            تم تأكيد الطلب
+          </h1>
           <p className="mt-3 text-white/65">
-            Thanks! Your {product.title} ({plan.label}) order has been recorded.
-            This is a demo checkout — no payment was processed and no card details
-            were collected.
+            شكرًا لك! تم تسجيل طلبك ({product.gameName} — {planLabelAr(plan.days)}).
           </p>
           <div className="mt-8 flex items-center justify-center gap-3">
             <a href={`#/product/${product.id}`} className="pill-btn pill-btn-ghost">
-              Back to Product
+              العودة إلى المنتج
             </a>
-            <a href="#products" className="pill-btn pill-btn-primary">
-              Browse More
+            <a href="#/products" className="pill-btn pill-btn-primary">
+              تصفّح المزيد
             </a>
           </div>
         </div>
@@ -56,28 +75,24 @@ export function CheckoutPage({ id, days }: { id: string; days?: number }) {
   }
 
   return (
-    <article className="pt-28 pb-24">
+    <article dir="rtl" className="font-ar pt-28 pb-24">
       <div className="mx-auto max-w-5xl px-6">
         <a
           href={`#/product/${product.id}`}
           className="inline-flex items-center gap-2 text-sm text-white/55 hover:text-white transition-colors"
         >
-          <span aria-hidden>←</span> Back to {product.title}
+          العودة إلى {product.gameName} <span aria-hidden>→</span>
         </a>
 
-        <h1 className="mt-6 text-4xl font-semibold tracking-tight">Checkout</h1>
-
-        {/* Demo notice */}
-        <div className="mt-6 rounded-xl border border-amber-500/25 bg-amber-500/10 px-4 py-3 text-sm text-amber-200/90">
-          Demo checkout — this page does not process real payments or collect card
-          details. It's a UI mockup for the learning clone.
-        </div>
+        <h1 className="font-ar-display mt-6 text-4xl font-semibold tracking-tight">
+          إتمام الطلب
+        </h1>
 
         <div className="mt-8 grid gap-8 lg:grid-cols-[1.4fr_1fr]">
-          {/* ---- Left: plan + (demo) payment ---- */}
+          {/* ---- اختيار الباقة + الدفع ---- */}
           <div className="space-y-8">
             <div>
-              <h2 className="text-lg font-semibold">Select access plan</h2>
+              <h2 className="text-lg font-semibold">اختر مدة الاشتراك</h2>
               <div className="mt-4 grid gap-3">
                 {product.plans.map((p) => {
                   const active = p.days === planDays
@@ -87,7 +102,7 @@ export function CheckoutPage({ id, days }: { id: string; days?: number }) {
                       type="button"
                       onClick={() => setPlanDays(p.days)}
                       className={[
-                        'card flex items-center justify-between p-4 text-left cursor-pointer',
+                        'card flex items-center justify-between p-4 text-right cursor-pointer',
                         active ? 'ring-1 ring-[var(--color-primary)]/50' : '',
                       ].join(' ')}
                     >
@@ -104,9 +119,9 @@ export function CheckoutPage({ id, days }: { id: string; days?: number }) {
                             <span className="size-2 rounded-full bg-[var(--color-primary)]" />
                           )}
                         </span>
-                        <span className="font-medium">{p.label} Access</span>
+                        <span className="font-medium">{planLabelAr(p.days)}</span>
                       </span>
-                      <span className="font-semibold">${p.price.toFixed(2)}</span>
+                      <span className="font-semibold">{formatSAR(p.price)}</span>
                     </button>
                   )
                 })}
@@ -114,10 +129,7 @@ export function CheckoutPage({ id, days }: { id: string; days?: number }) {
             </div>
 
             <div>
-              <h2 className="text-lg font-semibold">Payment method</h2>
-              <p className="mt-1 text-sm text-white/55">
-                Demo only — selecting a method does nothing.
-              </p>
+              <h2 className="text-lg font-semibold">طريقة الدفع</h2>
               <div className="mt-4 flex flex-wrap gap-2">
                 {PAYMENT_METHODS.map((m) => (
                   <span
@@ -131,35 +143,46 @@ export function CheckoutPage({ id, days }: { id: string; days?: number }) {
             </div>
 
             <label className="block">
-              <span className="text-sm text-white/70">Email for receipt</span>
+              <span className="text-sm text-white/70">البريد الإلكتروني للإيصال</span>
               <input
                 type="email"
                 placeholder="you@example.com"
-                className="mt-2 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-white/35 outline-none focus:border-white/25"
+                dir="ltr"
+                className="mt-2 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-white/35 outline-none focus:border-white/25 text-right"
               />
             </label>
           </div>
 
-          {/* ---- Right: order summary ---- */}
+          {/* ---- ملخص الطلب ---- */}
           <aside className="card p-6 h-fit cursor-default">
             <div className="aspect-[16/9] w-full overflow-hidden rounded-lg">
-              <ProductCover product={product} />
+              {cover ? (
+                <img
+                  src={cover}
+                  alt={product.gameName}
+                  className="h-full w-full object-cover"
+                />
+              ) : (
+                <div className="h-full w-full" style={{ background: product.gradient }} />
+              )}
             </div>
-            <h3 className="mt-4 font-semibold">{product.title}</h3>
-            <p className="text-sm text-white/55">{plan.label} access</p>
+            <h3 className="mt-4 font-semibold" dir="ltr">
+              {product.gameName}
+            </h3>
+            <p className="text-sm text-white/55">{planLabelAr(plan.days)}</p>
 
             <dl className="mt-5 space-y-2 text-sm">
               <div className="flex justify-between text-white/70">
-                <dt>Subtotal</dt>
-                <dd>${plan.price.toFixed(2)}</dd>
+                <dt>المجموع الفرعي</dt>
+                <dd>{formatSAR(plan.price)}</dd>
               </div>
               <div className="flex justify-between text-white/70">
-                <dt>Taxes</dt>
-                <dd>$0.00</dd>
+                <dt>الضريبة</dt>
+                <dd>0 ريال</dd>
               </div>
               <div className="mt-3 flex justify-between border-t border-white/10 pt-3 text-base font-semibold">
-                <dt>Total</dt>
-                <dd>${plan.price.toFixed(2)}</dd>
+                <dt>الإجمالي</dt>
+                <dd>{formatSAR(plan.price)}</dd>
               </div>
             </dl>
 
@@ -168,11 +191,8 @@ export function CheckoutPage({ id, days }: { id: string; days?: number }) {
               onClick={() => setDone(true)}
               className="mt-6 pill-btn pill-btn-primary w-full justify-center"
             >
-              Complete Order
+              إتمام الطلب
             </button>
-            <p className="mt-3 text-center text-xs text-white/40">
-              No real charge — demo checkout.
-            </p>
           </aside>
         </div>
       </div>
