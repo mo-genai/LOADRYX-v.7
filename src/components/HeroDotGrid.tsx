@@ -35,7 +35,7 @@ interface Dot {
 const DOT_SIZE = 2
 const GAP = 43
 const BASE_COLOR = '#2c2d2f'
-const ACTIVE_COLOR = '#b8b5b5'
+const ACTIVE_COLOR = '#cbcaca'
 const PROXIMITY = 340
 const SPEED_TRIGGER = 100
 const SHOCK_RADIUS = 340
