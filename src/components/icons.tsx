@@ -218,12 +218,12 @@ export function SecurityIcon(p: Props) {
   )
 }
 
-/* Direct activation — power button */
+/* Direct activation — play in a circle (start / go live) */
 export function ActivationIcon(p: Props) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" {...p}>
-      <path d="M12 3.5v7.5" />
-      <path d="M7.6 6.6a7 7 0 1 0 8.8 0" />
+      <circle cx="12" cy="12" r="9" />
+      <path d="M10 8.5 16 12l-6 3.5V8.5Z" />
     </svg>
   )
 }
@@ -235,6 +235,49 @@ export function WarrantyIcon(p: Props) {
       <circle cx="12" cy="9" r="5.5" />
       <path d="m9.7 9 1.6 1.6L14.4 7.6" />
       <path d="M8.8 13.8 7.4 20.5l4.6-2.5 4.6 2.5-1.4-6.7" />
+    </svg>
+  )
+}
+
+export function MenuIcon(p: Props) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}>
+      <path d="M4 7h16M4 12h16M4 17h16" />
+    </svg>
+  )
+}
+
+export function CloseIcon(p: Props) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}>
+      <path d="M6 6l12 12M18 6 6 18" />
+    </svg>
+  )
+}
+
+export function PlayCircleIcon(p: Props) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" {...p}>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M10 8.5 16 12l-6 3.5V8.5Z" />
+    </svg>
+  )
+}
+
+export function BoxIcon(p: Props) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" {...p}>
+      <path d="M21 7.5 12 3 3 7.5v9L12 21l9-4.5v-9Z" />
+      <path d="M3 7.5 12 12l9-4.5M12 12v9" />
+    </svg>
+  )
+}
+
+export function MonitorIcon(p: Props) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" {...p}>
+      <rect x="3" y="4" width="18" height="12" rx="2" />
+      <path d="M8 20h8M12 16v4" />
     </svg>
   )
 }

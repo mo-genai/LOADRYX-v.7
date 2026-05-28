@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { NAV_LINKS } from '../data/content'
+import { CloseIcon, MenuIcon } from './icons'
 
 const LR_LOGO_SRC =
   'https://res.cloudinary.com/dmp1fo2j4/image/upload/v1779955949/LR_logo_vilxah.svg'
@@ -16,6 +17,7 @@ const LR_LOGO_SRC =
  */
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
     const on = () => setScrolled(window.scrollY > 12)
@@ -25,10 +27,11 @@ export function Header() {
   }, [])
 
   // "تواصل معنا" should reach the contact section from anywhere. We use an
-  // instant jump (not smooth): the ambient canvas + hero video keep the layout
-  // reflowing, which cancels long smooth-scroll animations on this page.
+  // instant jump (not smooth): the hero video keeps the layout reflowing, which
+  // cancels long smooth-scroll animations on this page.
   const goToContact = (e: React.MouseEvent) => {
     e.preventDefault()
+    setMenuOpen(false)
     const here = document.getElementById('contact')
     if (here) {
       here.scrollIntoView({ behavior: 'instant', block: 'start' })
@@ -120,7 +123,48 @@ export function Header() {
               تواصل معنا
             </a>
           </div>
+
+          {/* mobile menu toggle */}
+          <button
+            type="button"
+            onClick={() => setMenuOpen((o) => !o)}
+            aria-label="القائمة"
+            aria-expanded={menuOpen}
+            className="relative z-20 grid size-10 place-items-center rounded-lg text-white lg:hidden"
+          >
+            {menuOpen ? (
+              <CloseIcon className="size-6" />
+            ) : (
+              <MenuIcon className="size-6" />
+            )}
+          </button>
         </div>
+
+        {/* mobile dropdown */}
+        {menuOpen && (
+          <div className="absolute left-0 right-0 top-full z-20 mt-2 rounded-2xl border border-white/10 bg-[color-mix(in_oklab,var(--color-background)_94%,transparent)] p-3 backdrop-blur-xl shadow-xl lg:hidden">
+            <ul className="flex flex-col gap-1 text-sm list-none m-0 p-0">
+              {NAV_LINKS.map((l) => (
+                <li key={l.label}>
+                  <a
+                    href={l.href}
+                    onClick={() => setMenuOpen(false)}
+                    className="block rounded-lg px-3 py-3 text-white/80 hover:bg-white/5 hover:text-white"
+                  >
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <a
+              href="#contact"
+              onClick={goToContact}
+              className="mt-2 pill-btn pill-btn-primary w-full justify-center text-sm"
+            >
+              تواصل معنا
+            </a>
+          </div>
+        )}
       </div>
     </nav>
   )

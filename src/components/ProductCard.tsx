@@ -1,15 +1,13 @@
 import { formatSAR } from '../data/content'
 import { productImage } from '../data/productImages'
-import { ShieldCheckIcon } from './icons'
 import type { ProductCard as ProductCardType } from '../types/content'
 
 /**
- * Product card — full cover photo on top, then game name (kept in English) and
- * price in Saudi Riyal, with a verification shield + status dot (no text), and
- * two actions: اشترِ (purchase) and استعراض (showcase / details).
+ * Product card — cover photo fills the top of the card, then the game name
+ * (kept in English) and a prominent price in Saudi Riyal, with a single
+ * action: استعرض الباقة (view the package / details).
  */
 export function ProductCard({ product: p }: { product: ProductCardType }) {
-  const isBeta = p.status === 'beta'
   const cover = productImage(p.id)
 
   return (
@@ -24,48 +22,29 @@ export function ProductCard({ product: p }: { product: ProductCardType }) {
             src={cover}
             alt={p.gameName}
             loading="lazy"
-            className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover/cover:scale-[1.04]"
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover/cover:scale-[1.05]"
           />
         ) : (
           <div className="absolute inset-0" style={{ background: p.gradient }} />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/45 to-transparent" />
       </a>
 
-      <div className="flex items-start justify-between gap-3 px-1 pt-4">
+      <div className="flex items-center justify-between gap-3 px-1 pt-4">
         <h3 className="text-lg font-semibold text-white" dir="ltr">
           {p.gameName}
         </h3>
-        <div className="text-left">
-          <p className="whitespace-nowrap text-base font-bold text-white">
-            {formatSAR(p.priceFrom)}
-          </p>
-          <div className="mt-1 flex items-center justify-start gap-1.5">
-            <ShieldCheckIcon className="size-4 text-sky-400" />
-            <span
-              className={[
-                'inline-block h-2 w-2 rounded-full',
-                isBeta ? 'bg-amber-400' : 'bg-emerald-400',
-              ].join(' ')}
-            />
-          </div>
-        </div>
+        <p className="whitespace-nowrap text-2xl font-bold text-white">
+          {formatSAR(p.priceFrom)}
+        </p>
       </div>
 
-      <div className="mt-4 flex gap-2">
-        <a
-          href={`#/checkout/${p.id}`}
-          className="pill-btn pill-btn-primary flex-1 justify-center text-sm"
-        >
-          اشترِ
-        </a>
-        <a
-          href={`#/product/${p.id}`}
-          className="pill-btn pill-btn-ghost flex-1 justify-center text-sm"
-        >
-          استعراض
-        </a>
-      </div>
+      <a
+        href={`#/product/${p.id}`}
+        className="mt-4 pill-btn pill-btn-primary w-full justify-center"
+      >
+        استعرض الباقة
+      </a>
     </div>
   )
 }

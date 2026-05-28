@@ -1,4 +1,3 @@
-import { AmbientCanvas } from './components/AmbientCanvas'
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { HomePage } from './pages/HomePage'
@@ -11,15 +10,9 @@ const PAGE_BOTTOM_MASK =
   'linear-gradient(to bottom, black 0%, black 92%, rgba(0,0,0,.35) 100%)'
 
 /**
- * The canvas is mounted INSIDE the masked wrapper, as a sibling that comes
- * BEFORE <main> in the DOM. This puts it in the wrapper's stacking context
- * at z-index: auto, which means:
- *   - It paints ABOVE the hero's -z-20 video and -z-10 vignettes
- *   - It paints BELOW the hero's z-auto content
- *
- * A tiny hash router swaps the page inside <main>. Product detail + checkout
- * pages get the same chrome (navbar, ambient background, footer) as the home
- * page, but only the Products flow is new — every other section is untouched.
+ * A tiny hash router swaps the page inside <main>. The hero keeps its own
+ * HeroDotGrid; everything below the hero (home sections + product/checkout
+ * pages) stays a clean, calm black — no ambient dot field.
  */
 function App() {
   const route = useRoute()
@@ -34,7 +27,6 @@ function App() {
           WebkitMaskImage: PAGE_BOTTOM_MASK,
         }}
       >
-        <AmbientCanvas />
         <main className="overflow-hidden w-full">
           {route.name === 'home' && <HomePage />}
           {route.name === 'products' && (
@@ -51,7 +43,7 @@ function App() {
           )}
           {route.name === 'checkout' && (
             <>
-              <CheckoutPage id={route.id} days={route.days} />
+              <CheckoutPage id={route.id} />
               <Footer />
             </>
           )}
