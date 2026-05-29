@@ -25,7 +25,7 @@ export function formatSAR(usd: number): string {
 
 export const NAV_LINKS: NavLink[] = [
   { label: 'الرئيسية', href: '#' },
-  { label: 'المنتجات', href: '#products' },
+  { label: 'المنتجات', href: '#/products' },
   { label: 'الأسئلة الشائعة', href: '#faq' },
 ]
 
@@ -290,25 +290,25 @@ const PRODUCT_SEEDS: Seed[] = [
     priceFrom: 59.99,
     status: 'active',
     monogram: 'OW2',
-    gradient: 'linear-gradient(135deg, #c2410c 0%, #ea580c 55%, #fbbf24 100%)',
+    gradient: 'linear-gradient(135deg, #ea580c 0%, #f97316 55%, #38bdf8 100%)',
   },
   {
     id: 'black-ops-6',
     gameName: 'Black Ops 6',
-    kind: 'Performance Setup',
+    kind: 'Gaming Utility',
     priceFrom: 23.99,
     status: 'beta',
     monogram: 'BO6',
-    gradient: 'linear-gradient(135deg, #111827 0%, #1e3a8a 55%, #f97316 100%)',
+    gradient: 'linear-gradient(135deg, #111827 0%, #334155 55%, #f97316 100%)',
   },
   {
     id: 'arma-3',
     gameName: 'Arma 3',
-    kind: 'Gaming Utility',
+    kind: 'Game Tool',
     priceFrom: 29.99,
     status: 'active',
-    monogram: 'ARMA',
-    gradient: 'linear-gradient(135deg, #1f2937 0%, #374151 55%, #6b7280 100%)',
+    monogram: 'A3',
+    gradient: 'linear-gradient(135deg, #1f2937 0%, #4b5563 55%, #d1d5db 100%)',
   },
   {
     id: 'arc-raiders',
@@ -317,186 +317,100 @@ const PRODUCT_SEEDS: Seed[] = [
     priceFrom: 49.99,
     status: 'active',
     monogram: 'ARC',
-    gradient: 'linear-gradient(135deg, #7c2d12 0%, #b45309 55%, #fcd34d 100%)',
+    gradient: 'linear-gradient(135deg, #312e81 0%, #7c2d12 55%, #fbbf24 100%)',
   },
   {
     id: 'black-ops-7',
     gameName: 'Black Ops 7',
-    kind: 'Performance Setup',
+    kind: 'Gaming Utility',
     priceFrom: 23.99,
     status: 'beta',
     monogram: 'BO7',
-    gradient: 'linear-gradient(135deg, #0f172a 0%, #b91c1c 60%, #f59e0b 100%)',
+    gradient: 'linear-gradient(135deg, #0f172a 0%, #1e3a8a 55%, #ea580c 100%)',
   },
   {
     id: 'cold-war',
-    gameName: 'Black Ops Cold War',
+    gameName: 'Cold War',
     kind: 'Gaming Utility',
     priceFrom: 23.99,
     status: 'active',
-    monogram: 'BOCW',
-    gradient: 'linear-gradient(135deg, #064e3b 0%, #047857 55%, #facc15 100%)',
+    monogram: 'CW',
+    gradient: 'linear-gradient(135deg, #1f2937 0%, #334155 55%, #dc2626 100%)',
   },
   {
     id: 'mw-iii',
-    gameName: 'Modern Warfare III',
-    kind: 'Game Tool',
-    priceFrom: 23.99,
-    status: 'active',
-    monogram: 'MWIII',
-    gradient: 'linear-gradient(135deg, #14532d 0%, #166534 55%, #84cc16 100%)',
-  },
-  {
-    id: 'mw-ii',
-    gameName: 'Modern Warfare II',
-    kind: 'Game Tool',
-    priceFrom: 23.99,
-    status: 'active',
-    monogram: 'MWII',
-    gradient: 'linear-gradient(135deg, #450a0a 0%, #991b1b 60%, #f97316 100%)',
-  },
-  {
-    id: 'vanguard',
-    gameName: 'Vanguard',
+    gameName: 'MW III',
     kind: 'Gaming Utility',
     priceFrom: 23.99,
     status: 'active',
-    monogram: 'VG',
-    gradient: 'linear-gradient(135deg, #1e293b 0%, #b45309 60%, #fde68a 100%)',
+    monogram: 'MW3',
+    gradient: 'linear-gradient(135deg, #450a0a 0%, #7f1d1d 55%, #111827 100%)',
   },
   {
-    id: 'mw-2019',
-    gameName: 'Modern Warfare 2019',
-    kind: 'Game Tool',
+    id: 'mw-ii',
+    gameName: 'MW II',
+    kind: 'Gaming Utility',
     priceFrom: 23.99,
     status: 'active',
-    monogram: 'MW19',
-    gradient: 'linear-gradient(135deg, #1f2937 0%, #15803d 60%, #bef264 100%)',
+    monogram: 'MW2',
+    gradient: 'linear-gradient(135deg, #14532d 0%, #166534 55%, #0f172a 100%)',
   },
 ]
 
-export const PRODUCTS: ProductCard[] = PRODUCT_SEEDS.map((s) => ({
-  id: s.id,
-  gameName: s.gameName,
-  title: `${s.gameName} ${s.kind}`,
-  kind: s.kind,
-  tagline: `Private ${s.gameName} ${s.kind.toLowerCase()} for verified members`,
-  priceFrom: s.priceFrom,
-  status: s.status,
-  verified: true,
-  gradient: s.gradient,
-  monogram: s.monogram,
-  description:
-    `The ${s.gameName} ${s.kind} is an in-house gaming utility that helps verified players ` +
-    `fine-tune their setup for ${s.gameName}. It bundles sensitivity profiles, a customizable ` +
-    `HUD overlay, minimap tools, controller mapping, and stream-friendly capture into one ` +
-    `lightweight app. Every release is tested for stability and ships with continuous updates ` +
-    `and dedicated support.`,
-  features: buildFeatures(s.gameName),
-  compatibility: {
-    releaseDate: '2024',
-    platforms: 'PC (Steam / Epic / Battle.net)',
-    os: 'Windows 10 & 11 (64-bit)',
-    recording: 'Compatible with OBS, Discord & NVIDIA capture',
-  },
-  plans: plans(s.priceFrom),
+export const PRODUCTS: ProductCard[] = PRODUCT_SEEDS.map((seed) => ({
+  ...seed,
+  description: `${seed.gameName} ${seed.kind} package with assisted setup, clean onboarding, and post-purchase support.`,
+  features: buildFeatures(seed.gameName),
+  plans: plans(seed.priceFrom),
 }))
 
-export function getProduct(id: string): ProductCard | undefined {
-  return PRODUCTS.find((p) => p.id === id)
-}
-
 export const STATS: StatCard[] = [
-  { value: '99%', label: 'Positive Reviews', icon: 'trophy' },
-  { value: '70,000+', label: 'Registered Members', icon: 'users' },
-  { value: '23,000+', label: `Verified ${BRAND} Users`, icon: 'shield-check' },
+  {
+    value: '99.9%',
+    label: 'Service uptime',
+  },
+  {
+    value: '24/7',
+    label: 'Support availability',
+  },
+  {
+    value: '12+',
+    label: 'Supported titles',
+  },
 ]
 
 export const BENEFITS: BenefitCard[] = [
   {
-    visual: 'percent',
-    title: 'In-House Development',
+    title: 'Fast onboarding',
     description:
-      'We are a team of engineers passionate about building the most polished tools on the market.',
+      'Guided activation keeps setup clear from purchase to first session.',
   },
   {
-    visual: 'shield-glow',
-    title: 'Secure by Default',
+    title: 'Private configuration',
     description:
-      'Robust technology means every toolkit ships with sensible defaults, encrypted state, and audited dependencies.',
+      'Profiles and preferences remain local to your workflow whenever possible.',
   },
   {
-    visual: 'pricing',
-    title: 'Fair Pricing',
+    title: 'Ongoing updates',
     description:
-      'We offer the most competitive pricing for premium toolkits in a curated ecosystem.',
-  },
-  {
-    visual: 'editor',
-    title: 'Easy to Use',
-    description:
-      'Our tools are designed to be approachable. Any team member can use them without friction.',
-  },
-  {
-    visual: 'payments',
-    title: 'Secure Payments',
-    description:
-      'We use trusted payment gateways to ensure every transaction stays safe end-to-end.',
-  },
-  {
-    visual: 'version',
-    title: 'Fast Updates',
-    description:
-      'Upstream releases are tracked continuously, with prompt updates to match the newest version.',
-  },
-  {
-    visual: 'refund',
-    title: 'Risk-Free',
-    description:
-      'In case of incidents, your remaining balance is refunded or transferred to a different toolkit.',
-  },
-  {
-    visual: 'changelog',
-    title: 'Active Progression',
-    description:
-      'Our toolkits are continuously optimized, updated, and expanded with new features.',
+      'Packages are maintained so supported titles stay usable through regular changes.',
   },
 ]
 
 export const FOOTER_COLUMNS: FooterColumn[] = [
   {
-    heading: 'Popular Tools',
+    title: 'روابط',
     links: [
-      { label: 'Fortnite', href: '#/product/fortnite' },
-      { label: 'PUBG', href: '#/product/pubg' },
-      { label: 'Apex Legends', href: '#/product/apex' },
-      { label: 'DayZ', href: '#/product/dayz' },
-      { label: 'Arma 3', href: '#/product/arma-3' },
-      { label: 'Arc Raiders', href: '#/product/arc-raiders' },
+      { label: 'المنتجات', href: '#/products' },
+      { label: 'الأسئلة الشائعة', href: '#faq' },
+      { label: 'تواصل معنا', href: '#contact' },
     ],
   },
   {
-    heading: 'More Tools',
+    title: 'الدعم',
     links: [
-      { label: 'Overwatch 2', href: '#/product/overwatch-2' },
-      { label: 'Black Ops 6', href: '#/product/black-ops-6' },
-      { label: 'Black Ops 7', href: '#/product/black-ops-7' },
-      { label: 'Cold War', href: '#/product/cold-war' },
-      { label: 'Modern Warfare III', href: '#/product/mw-iii' },
-      { label: 'Vanguard', href: '#/product/vanguard' },
-    ],
-  },
-  {
-    heading: 'Quick Links',
-    links: [
-      { label: 'Status', href: '#status' },
-      { label: 'Getting Started', href: '#start' },
-      { label: 'FAQs', href: '#faq' },
-      { label: 'Applications', href: '#apply' },
-      { label: 'Store', href: '#products' },
-      { label: 'Manage Purchases', href: '#manage' },
+      { label: 'واتساب', href: 'https://wa.me/966573534407' },
+      { label: 'اتصال مباشر', href: 'tel:+966573534407' },
     ],
   },
 ]
-
-export const FOOTER_ABOUT = `The brand ${BRAND} stands for triple-A quality and reliable tools for modern product teams. What started as a small community in 2017 has grown into one of the most respected toolkit providers in the industry — with hundreds of satisfied customers, 100% transparency, unbeatable support, and a friendly, helpful community. Join us at ${BRAND.toLowerCase()}.example.`
