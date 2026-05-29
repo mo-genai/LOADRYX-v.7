@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 
-import Link from 'next/link'
+
 import type { ProductCard as Product } from '../types/content'
 
 type ProductCardProps = {
@@ -125,7 +125,7 @@ export function ProductCard({ product }: ProductCardProps) {
   const statusColor = product.status === 'beta' ? 'bg-red-500' : 'bg-green-500'
 
   return (
-    <Link href={href} dir="ltr">
+    <a href={href} dir="ltr">
       <div className="group relative overflow-hidden rounded-xl bg-gray-900 transition-all hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-2 hover:border-primary/50 duration-500 cursor-pointer border border-transparent">
         <div className="absolute inset-0 z-0">
           <div
@@ -226,7 +226,7 @@ export function ProductCard({ product }: ProductCardProps) {
           </div>
         </div>
       </div>
-    </Link>
+    </a>
   )
 }
 
