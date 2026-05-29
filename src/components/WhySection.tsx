@@ -59,7 +59,7 @@ function FeatureIcon({
 export function WhySection() {
   return (
     <section dir="rtl" className="font-ar py-16 md:py-32 dark:bg-transparent">
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto max-w-6xl px-6">
         <header className="text-center">
           <h2 className="font-ar-display text-balance text-4xl font-semibold lg:text-5xl">
             {WHY.title}
@@ -69,7 +69,7 @@ export function WhySection() {
           </p>
         </header>
 
-        <div className="w-full mx-auto mt-8 grid gap-6 md:mt-16 grid-cols-1 lg:grid-cols-3">
+        <div className="mx-auto mt-8 grid max-w-5xl grid-cols-1 gap-5 md:mt-14 lg:grid-cols-3">
           {FEATURES.map((feat) => {
             const Icon = ICONS[feat.icon]
             return (
