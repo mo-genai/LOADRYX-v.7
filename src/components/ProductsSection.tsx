@@ -13,7 +13,7 @@ export function ProductsSection() {
   const hasMore = PRODUCTS.length > VISIBLE_PRODUCT_COUNT
 
   return (
-    <section className="bg-zinc-50 py-16 md:py-32 dark:bg-transparent relative z-0">
+    <section id="products" className="bg-zinc-50 py-16 md:py-32 dark:bg-transparent relative z-0">
       <div className="@container mx-auto max-w-6xl px-4 lg:px-8">
         <div className="text-center">
           <h2 className="text-balance text-4xl font-semibold lg:text-5xl">
