@@ -19,7 +19,6 @@ export function Hero() {
 
   return (
     <section
-      <HeroDotGrid />
       dir="rtl"
       className="font-ar relative"
       style={{
@@ -27,7 +26,9 @@ export function Hero() {
         maskImage: 'linear-gradient(to bottom, black 0%, black 80%, transparent 100%)',
         WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 80%, transparent 100%)',
       }}
-    >  
+    >
+      <HeroDotGrid />
+
       <div className="relative pt-24 sm:pt-32 lg:pt-40 pb-12 sm:pb-16 lg:pb-32">
         {/* --------------- Layer 1+2: video frame, 75% width on lg+, side-masked --------------- */}
         <div className="absolute inset-0 -z-20 h-full lg:w-3/4 xl:w-3/4 2xl:w-3/4 mx-auto overflow-hidden">
