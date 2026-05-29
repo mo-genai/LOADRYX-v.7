@@ -59,7 +59,9 @@ export function Header() {
         aria-hidden
         className={[
           'absolute inset-0 mx-2 lg:mx-auto mt-2 transition-all ease-in-out duration-600 rounded-2xl',
-          scrolled ? 'bg-background/50 max-w-6xl border backdrop-blur-lg' : 'max-w-full',
+          scrolled
+            ? 'max-w-6xl border border-[oklch(1_0_0/0.1)] bg-[oklab(0.13_-0.0041752_-0.029708_/_0.5)] backdrop-blur-lg'
+            : 'max-w-full',
         ].join(' ')}
       />
 
@@ -148,7 +150,7 @@ export function Header() {
 
       {menuOpen && (
         <div className="absolute left-0 right-0 top-full w-full px-2 lg:hidden">
-          <div className="lg:mx-auto mt-2 max-w-full px-5 bg-background rounded-2xl border py-6">
+          <div className="lg:mx-auto mt-2 max-w-full px-5 bg-background rounded-2xl border border-[oklch(1_0_0/0.1)] py-6">
             <ul className="space-y-6 text-base mb-6 list-none m-0 p-0">
               {NAV_LINKS.map((l) => (
                 <li key={l.label}>
