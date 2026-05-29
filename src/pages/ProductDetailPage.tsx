@@ -46,6 +46,7 @@ export function ProductDetailPage({ id }: { id: string }) {
   }
 
   const cover = productImage(product.id)
+  const featurePreview = product.features.slice(0, 4)
   const showShowcase = () => {
     document.getElementById('showcase')?.scrollIntoView({ behavior: 'instant' })
   }
@@ -165,15 +166,35 @@ export function ProductDetailPage({ id }: { id: string }) {
         </div>
       </section>
 
-      {/* ---------------- الميزات والفوائد (محتوى يُضاف لاحقًا) ---------------- */}
+      {/* ---------------- الميزات والفوائد ---------------- */}
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6">
           <header className="text-center">
             <h2 className="font-ar-display text-3xl font-semibold lg:text-4xl">
               الميزات والفوائد
             </h2>
+            <p className="mx-auto mt-3 max-w-3xl text-white/60" dir="ltr">
+              Preview content for {product.gameName}. Replace these lines later with final product copy.
+            </p>
           </header>
-          <div className="mt-8 min-h-24" />
+
+          <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4" dir="ltr">
+            {featurePreview.map((group) => (
+              <article key={group.category} className="card min-h-[320px] p-6 text-left cursor-default">
+                <h3 className="text-2xl font-bold text-white">
+                  {group.category}
+                </h3>
+                <ul className="mt-6 space-y-4 text-white/85">
+                  {group.items.slice(0, 4).map((item) => (
+                    <li key={item} className="flex items-start gap-3">
+                      <span className="mt-0.5 text-white/45">✓</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
