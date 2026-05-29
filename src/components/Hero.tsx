@@ -103,7 +103,7 @@ export function Hero() {
                   <div
                     aria-hidden
                     className="invisible pointer-events-none select-none"
-                    style={{ fontVariationSettings: "'wght' 900" }}
+                    style={{ fontFamily: 'Cairo', fontVariationSettings: "'wght' 900" }}
                   >
                     {HERO.lines.map((line) => (
                       <div
