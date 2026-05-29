@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from 'react'
+import { useRef } from 'react'
 import { HERO } from '../data/content'
 import { HeroDotGrid } from './HeroDotGrid'
 import { VariableProximity } from './VariableProximity'
@@ -11,45 +11,11 @@ const HERO_POSTER_SRC =
 const SIDE_MASK =
   'linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%)'
 
-const HERO_FONT_MAX_PX = 84 // 5.25rem — desktop cap; shrinks to fit on mobile
+const HERO_FONT_SIZE = 'clamp(1.875rem, 7vw, 4.5rem)'
 const HERO_TITLE_CLASS = 'leading-tight'
 
 export function Hero() {
   const titleContainerRef = useRef<HTMLDivElement>(null)
-  const spacerRef = useRef<HTMLDivElement>(null)
-  const [titleFontSize, setTitleFontSize] = useState<string>(`${HERO_FONT_MAX_PX}px`)
-
-  // Auto-fit the title to the available width: keeps a single bold line that
-  // scales up to HERO_FONT_MAX_PX on desktop and shrinks on narrow phones so
-  // no line ever overflows / gets clipped. Measured off the invisible spacer
-  // (rendered at the heaviest 'wght' 900 = worst-case width).
-  useLayoutEffect(() => {
-    const fit = () => {
-      const container = titleContainerRef.current
-      const spacer = spacerRef.current
-      if (!container || !spacer) return
-      const avail = container.clientWidth
-      const lines = spacer.querySelectorAll<HTMLDivElement>(':scope > div')
-      if (!avail || lines.length === 0) return
-      let widest = 0
-      let curPx = HERO_FONT_MAX_PX
-      lines.forEach((d) => {
-        widest = Math.max(widest, d.scrollWidth)
-        curPx = parseFloat(getComputedStyle(d).fontSize) || curPx
-      })
-      if (!widest) return
-      const next = Math.min(HERO_FONT_MAX_PX, curPx * (avail * 0.98) / widest)
-      setTitleFontSize(`${Math.max(14, Math.floor(next))}px`)
-    }
-    fit()
-    window.addEventListener('resize', fit)
-    if (document.fonts?.ready) void document.fonts.ready.then(fit)
-    const t = window.setTimeout(fit, 450)
-    return () => {
-      window.removeEventListener('resize', fit)
-      window.clearTimeout(t)
-    }
-  }, [])
 
   return (
     <section
@@ -134,7 +100,6 @@ export function Hero() {
                   style={{ position: 'relative', textAlign: 'center', width: '100%' }}
                 >
                   <div
-                    ref={spacerRef}
                     aria-hidden
                     className="invisible pointer-events-none select-none"
                     style={{ fontFamily: 'Cairo', fontVariationSettings: "'wght' 900" }}
@@ -142,8 +107,8 @@ export function Hero() {
                     {HERO.lines.map((line) => (
                       <div
                         key={line}
-                        className={`block w-fit ${HERO_TITLE_CLASS} whitespace-nowrap mx-auto`}
-                        style={{ fontSize: titleFontSize }}
+                        className={`block w-fit ${HERO_TITLE_CLASS} mx-auto`}
+                        style={{ fontSize: HERO_FONT_SIZE }}
                       >
                         {line}
                       </div>
@@ -154,8 +119,8 @@ export function Hero() {
                     {HERO.lines.map((line) => (
                       <div
                         key={line}
-                        className="block w-fit whitespace-nowrap mx-auto"
-                        style={{ fontSize: titleFontSize }}
+                        className="block w-fit mx-auto"
+                        style={{ fontSize: HERO_FONT_SIZE }}
                       >
                         <VariableProximity
                           label={line}
