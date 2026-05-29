@@ -13,17 +13,13 @@ export function ProductCard({ product: p }: { product: ProductCardType }) {
             className="relative w-full h-full transition-transform duration-500 group-hover:scale-[1.05] transform-gpu"
             style={{ clipPath: 'inset(0 round 0.75rem)', minHeight: '400px' }}
           >
-            {cover ? (
-              <img
-                src={cover}
-                alt={p.gameName}
-                className="object-cover w-full h-full"
-                loading="lazy"
-                decoding="async"
-              />
-            ) : (
-              <div className="object-cover w-full h-full" style={{ background: p.gradient }} />
-            )}
+            <img
+              src={cover || ''}
+              alt={p.gameName}
+              className="object-cover w-full h-full"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
 
           <div
