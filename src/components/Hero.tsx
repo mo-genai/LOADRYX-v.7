@@ -35,7 +35,7 @@ export function Hero() {
       <main className="overflow-hidden w-full">
         <section>
           <div
-            className="relative pt-24 sm:pt-32 lg:pt-40 pb-12 sm:pb-16 lg:pb-32"
+            className="relative pt-20 sm:pt-32 lg:pt-40 pb-12 sm:pb-16 lg:pb-32"
             style={{ minHeight: '80.38vh' }}
           >
             <div className="absolute inset-0 -z-20 h-full lg:w-3/4 xl:w-3/4 2xl:w-3/4 mx-auto overflow-hidden">
@@ -96,7 +96,7 @@ export function Hero() {
               <div className="text-center sm:mx-auto lg:mr-auto lg:mt-0">
                 <div
                   ref={titleContainerRef}
-                  className="font-ar-display relative mt-6 sm:mt-15"
+                  className="font-ar-display relative mt-4 sm:mt-15"
                   style={{ position: 'relative', textAlign: 'center', width: '100%' }}
                 >
                   <div
@@ -136,7 +136,7 @@ export function Hero() {
                   </div>
                 </div>
 
-                <p className="mx-auto mt-6 sm:mt-11 max-w-2xl text-balance text-base sm:text-xl px-4 sm:px-0">
+                <p className="mx-auto mt-4 sm:mt-11 max-w-2xl text-balance text-base sm:text-xl px-4 sm:px-0">
                   <span
                     className="inline-block animate-fade-in-blur"
                     style={{
@@ -149,7 +149,7 @@ export function Hero() {
                   </span>
                 </p>
 
-                <div className="mt-7 sm:mt-18 flex flex-col items-center justify-center gap-3 sm:gap-4 lg:flex-row px-4 sm:px-0">
+                <div className="mt-6 sm:mt-18 flex flex-col items-center justify-center gap-3 sm:gap-4 lg:flex-row px-4 sm:px-0">
                   <div className="animate-fade-in-blur [animation-delay:1.2s] [animation-fill-mode:backwards] w-full md:w-auto">
                     <a
                       href="#products"
