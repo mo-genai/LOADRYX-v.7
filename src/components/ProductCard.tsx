@@ -4,9 +4,9 @@ type ProductCardProps = {
   href: string;
 };
 
-export default function ProductCard({ name, price, href }: ProductCardProps) {
+export function ProductCard({ name, price, href }: ProductCardProps) {
   return (
-    <a href={href}>
+    <a href={href} className="block no-underline">
       <div className="group relative overflow-hidden rounded-xl bg-gray-900 transition-all hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-2 hover:border-primary/50 duration-500 cursor-pointer border border-transparent">
         <div className="absolute inset-0 z-0">
           <div
@@ -60,3 +60,5 @@ export default function ProductCard({ name, price, href }: ProductCardProps) {
     </a>
   );
 }
+
+export default ProductCard;
