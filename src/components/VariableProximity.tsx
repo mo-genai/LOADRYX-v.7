@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useMemo, useRef } from 'react'
+import { forwardRef, useEffect, useMemo, useRef, useState } from 'react'
 
 type Falloff = 'linear' | 'exponential' | 'gaussian'
 
@@ -117,12 +117,23 @@ export const VariableProximity = forwardRef<HTMLSpanElement, Props>(
       className = '',
     } = props
 
+    const [canUseProximity, setCanUseProximity] = useState(false)
+
     const letterRefs = useRef<(HTMLSpanElement | null)[]>([])
     const centers = useRef<{ cx: number; cy: number }[]>([])
     const mouseRef = useRef({ x: -9999, y: -9999 })
     const lastRef = useRef({ x: -1, y: -1 })
 
     const tokens = useMemo(() => tokenize(label), [label])
+
+    useEffect(() => {
+      const mq = window.matchMedia('(hover: hover) and (pointer: fine)')
+      const update = () => setCanUseProximity(mq.matches)
+
+      update()
+      mq.addEventListener('change', update)
+      return () => mq.removeEventListener('change', update)
+    }, [])
 
     const axes = useMemo(() => {
       const parse = (s: string) =>
@@ -162,6 +173,12 @@ export const VariableProximity = forwardRef<HTMLSpanElement, Props>(
     }, [])
 
     useEffect(() => {
+      if (!canUseProximity) {
+        letterRefs.current = []
+        centers.current = []
+        return
+      }
+
       const measure = () => {
         const cr = containerRef.current?.getBoundingClientRect()
         if (!cr) return
@@ -231,7 +248,24 @@ export const VariableProximity = forwardRef<HTMLSpanElement, Props>(
         window.removeEventListener('resize', measure)
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [axes, fromFontVariationSettings, radius, falloff, containerRef, tokens])
+    }, [axes, fromFontVariationSettings, radius, falloff, containerRef, tokens, canUseProximity])
+
+    if (!canUseProximity) {
+      return (
+        <span
+          ref={ref}
+          className={className}
+          style={{
+            display: 'inline',
+            whiteSpace: 'normal',
+            fontFamily: ARABIC_VF_FAMILY,
+            fontVariationSettings: fromFontVariationSettings,
+          }}
+        >
+          {label}
+        </span>
+      )
+    }
 
     let i = 0
     return (
