@@ -267,7 +267,9 @@ export const VariableProximity = forwardRef<HTMLSpanElement, Props>(
                       transition:
                         'font-variation-settings 0.08s ease-out, text-shadow 0.2s ease-out',
                       willChange: 'font-variation-settings',
-                      ...(lt.arabic ? { fontFamily: ARABIC_VF_FAMILY } : null),
+                      // Apply the variable face to every letter — Arabic AND
+                      // Latin (e.g. LOADRYX) — so both interpolate weight.
+                      fontFamily: ARABIC_VF_FAMILY,
                     }}
                     aria-hidden
                   >
