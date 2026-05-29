@@ -136,7 +136,7 @@ export function Hero() {
                   </div>
                 </div>
 
-                <p className="mx-auto mt-11 max-w-2xl text-balance text-base sm:text-lg px-4 sm:px-0">
+                <p className="mx-auto mt-11 max-w-2xl text-balance text-lg sm:text-xl px-4 sm:px-0">
                   <span
                     className="inline-block animate-fade-in-blur"
                     style={{
@@ -149,7 +149,7 @@ export function Hero() {
                   </span>
                 </p>
 
-                <div className="mt-16 flex flex-col items-center justify-center gap-3 sm:gap-4 lg:flex-row px-4 sm:px-0">
+                <div className="mt-18 flex flex-col items-center justify-center gap-3 sm:gap-4 lg:flex-row px-4 sm:px-0">
                   <div className="animate-fade-in-blur [animation-delay:1.2s] [animation-fill-mode:backwards] w-full md:w-auto">
                     <a
                       href="#products"
