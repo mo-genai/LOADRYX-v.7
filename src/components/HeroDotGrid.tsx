@@ -4,25 +4,6 @@ import { InertiaPlugin } from 'gsap/InertiaPlugin'
 
 gsap.registerPlugin(InertiaPlugin)
 
-/**
- * Hero-only DotGrid — verbatim port of the React Bits DotGrid component
- * (https://reactbits.dev/backgrounds/dot-grid).
- *
- * Differences from the upstream source:
- *  1. Visual settings hard-coded to the values you provided
- *     (dotSize 2, gap 43, base #3a3a42, active #ffffff, proximity 340,
- *      shockRadius 340, shockStrength 5, resistance 600, returnDuration 5)
- *  2. Window listeners are scoped to the hero — both mousemove and click
- *     bail out when the pointer is outside the canvas's CSS rect, so
- *     interactions in the products / cards sections don't fire shockwaves
- *     up in the hero.
- *  3. Throttle is inlined (no lodash-es dependency).
- *
- * Everything else — speed-based inertia, _inertiaApplied flag, inertia
- * tween → elastic.out return, mousemove proximity color activation — is
- * the original React Bits algorithm.
- */
-
 interface Dot {
   cx: number
   cy: number
@@ -31,7 +12,6 @@ interface Dot {
   _inertiaApplied: boolean
 }
 
-/* ---------- Settings ---------- */
 const DOT_SIZE = 2
 const GAP = 43
 const BASE_COLOR = '#ffffff34'
@@ -44,7 +24,6 @@ const MAX_SPEED = 5000
 const RESISTANCE = 600
 const RETURN_DURATION = 5
 
-/* ---------- Helpers ---------- */
 function hexToRgb(hex: string) {
   const m = hex.match(/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i)
   if (!m) return { r: 0, g: 0, b: 0 }
@@ -66,7 +45,6 @@ function throttle<F extends (...args: never[]) => void>(fn: F, wait: number) {
   }) as F
 }
 
-/* ---------- Component ---------- */
 export function HeroDotGrid() {
   const wrapperRef = useRef<HTMLDivElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -129,7 +107,6 @@ export function HeroDotGrid() {
     dotsRef.current = dots
   }, [])
 
-  /* ---- Render loop (rAF) ---- */
   useEffect(() => {
     if (!circlePath) return
     const canvas = canvasRef.current
@@ -141,8 +118,6 @@ export function HeroDotGrid() {
     const proxSq = PROXIMITY * PROXIMITY
 
     const draw = () => {
-      // canvas dimensions in CSS px — read from style width since setTransform
-      // is configured for DPR scaling
       const cssW = canvas.clientWidth
       const cssH = canvas.clientHeight
       ctx.clearRect(0, 0, cssW, cssH)
@@ -179,7 +154,6 @@ export function HeroDotGrid() {
     return () => cancelAnimationFrame(rafId)
   }, [baseRgb, activeRgb, circlePath])
 
-  /* ---- Initial layout + resize ---- */
   useEffect(() => {
     buildGrid()
     let ro: ResizeObserver | null = null
@@ -195,7 +169,6 @@ export function HeroDotGrid() {
     }
   }, [buildGrid])
 
-  /* ---- Mousemove (speed-tracked inertia) + click (shockwave) ---- */
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
       const canvas = canvasRef.current
@@ -232,7 +205,6 @@ export function HeroDotGrid() {
       pr.speed = speed
 
       if (!insideHero) {
-        // Stop the color halo from following the cursor outside the hero
         pr.x = -9999
         pr.y = -9999
         return
@@ -241,7 +213,6 @@ export function HeroDotGrid() {
       pr.x = localX
       pr.y = localY
 
-      // Speed-based inertia kick — same algorithm as React Bits
       for (let i = 0; i < dotsRef.current.length; i++) {
         const dot = dotsRef.current[i]
         const dist = Math.hypot(dot.cx - pr.x, dot.cy - pr.y)
@@ -272,7 +243,6 @@ export function HeroDotGrid() {
       const rect = canvas.getBoundingClientRect()
       const cx = e.clientX - rect.left
       const cy = e.clientY - rect.top
-      // Hero-only: ignore clicks outside the canvas rect
       if (cx < 0 || cy < 0 || cx > rect.width || cy > rect.height) return
 
       for (let i = 0; i < dotsRef.current.length; i++) {
@@ -311,15 +281,8 @@ export function HeroDotGrid() {
   }, [])
 
   return (
-    <div
-      ref={wrapperRef}
-      aria-hidden
-      // -z-[5] sits between the hero's vignettes (-z-10) and the in-flow
-      // title / subtitle / buttons (default z), and pointer-events: none lets
-      // clicks on hero buttons pass through to those buttons.
-      className="absolute inset-0 w-full h-full pointer-events-none -z-[5]"
-    >
-      <canvas ref={canvasRef} className="block w-full h-full" />
+    <div ref={wrapperRef} aria-hidden className="absolute inset-0 w-full h-full">
+      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" />
     </div>
   )
 }
