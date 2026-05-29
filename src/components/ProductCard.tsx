@@ -11,52 +11,62 @@ export function ProductCard({ product: p }: { product: ProductCardType }) {
       href={`#/product/${p.id}`}
       aria-label={p.gameName}
       className="
-        group relative block h-[300px] overflow-hidden rounded-xl
-        border border-white/10 bg-black
-        transition duration-500 hover:-translate-y-1 hover:border-white/20
+        group relative block min-h-[400px] cursor-pointer overflow-hidden rounded-xl
+        border border-transparent bg-gray-900
+        transition-all duration-500 hover:-translate-y-2 hover:border-primary/50
+        hover:shadow-xl hover:shadow-primary/5
       "
     >
-      {cover ? (
-        <img
-          src={cover}
-          alt={p.gameName}
-          loading="lazy"
+      <div className="absolute inset-0 z-0">
+        <div
           className="
-            absolute inset-0 h-full w-full object-cover object-center
-            transition-transform duration-700 group-hover:scale-[1.05]
+            relative h-full min-h-[400px] w-full transform-gpu
+            transition-transform duration-500 group-hover:scale-[1.05]
           "
-        />
-      ) : (
-        <div className="absolute inset-0" style={{ background: p.gradient }} />
-      )}
+          style={{ clipPath: 'inset(0 round 0.75rem)' }}
+        >
+          {cover ? (
+            <img
+              src={cover}
+              alt={p.gameName}
+              loading="lazy"
+              className="h-full min-h-[400px] w-full object-cover object-center"
+            />
+          ) : (
+            <div className="h-full min-h-[400px] w-full" style={{ background: p.gradient }} />
+          )}
 
-      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-black/10" />
-      <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/95 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/40 to-transparent" />
+        </div>
+      </div>
 
-      <div className="relative z-10 flex h-full flex-col justify-end p-5">
+      <div className="relative z-10 flex min-h-[400px] flex-col justify-end p-5">
         <div className="mb-4">
-          <h3 className="text-xl font-bold leading-tight text-white">
+          <h3 className="text-center text-2xl font-bold text-white">
             {p.gameName}
           </h3>
 
-          <p className="mt-1 text-xs text-white/60">
-            السعر يبدأ من
-          </p>
+          <div className="mt-6 flex items-center gap-3">
+            <span className="text-xl font-bold text-white">
+              {formatSAR(p.priceFrom)}
+            </span>
 
-          <p className="mt-0.5 text-lg font-bold text-white">
-            {formatSAR(p.priceFrom)}
-          </p>
-
-          <div className="mt-2 flex items-center gap-3">
-            <span className="h-2 w-2 rounded-full bg-emerald-500" />
-            <span className="inline-flex h-4 w-4 items-center justify-center rounded-full border border-blue-400/70 text-[10px] text-blue-400">
+            <span className="mr-auto inline-flex h-5 w-5 items-center justify-center rounded-full border border-blue-400/70 text-xs text-blue-400">
               ✓
             </span>
+
+            <span className="h-2 w-2 rounded-full bg-green-500" />
           </div>
         </div>
 
-        <div className="rounded-md bg-white py-2 text-center text-sm font-medium text-black transition group-hover:bg-white/90">
-          استعرض الباقة
+        <div
+          className="
+            h-9 w-full rounded-md bg-primary px-4 py-2 text-center text-sm
+            font-medium text-primary-foreground shadow-xs transition-colors
+            group-hover:bg-primary/90
+          "
+        >
+          اشتر
         </div>
       </div>
     </a>
