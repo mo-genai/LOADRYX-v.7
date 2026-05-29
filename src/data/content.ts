@@ -13,6 +13,8 @@ import type {
 
 export const BRAND = 'NIMBUS'
 export const BRAND_TAGLINE = 'Production-Ready Tools for Modern Teams'
+export const FOOTER_ABOUT =
+  'LOADRYX يقدم تجربة تجهيز رقمية واضحة، مع دعم مباشر ومتابعة بعد الشراء.'
 
 /** Display prices in Saudi Riyal. Base catalogue numbers are kept in USD. */
 const SAR_RATE = 3.75
@@ -150,14 +152,6 @@ export const CONTACT = {
   ] satisfies ContactChannel[],
 }
 
-/* -------------------------------------------------------------------------- */
-/* Products — a legal digital gaming-tools / player-assistance catalogue.     */
-/* Game names are factual product identifiers; all functionality is framed    */
-/* as legitimate gaming utilities (no cheat/hack/aimbot/wallhack wording).    */
-/* -------------------------------------------------------------------------- */
-
-// Shared, sanitized feature groups. Most titles tailor a couple of entries
-// per game while keeping the same overall structure as the reference.
 function buildFeatures(game: string): FeatureGroup[] {
   return [
     {
@@ -234,6 +228,13 @@ function plans(base: number): PricingPlan[] {
     { label: '14 Days', days: 14, price: Math.round(base * 0.8 * 100) / 100 },
     { label: '30 Days', days: 30, price: base },
   ]
+}
+
+const COMPATIBILITY = {
+  releaseDate: 'متاح الآن',
+  platforms: 'PC / Console capture workflow',
+  os: 'Windows 10 / 11',
+  recording: 'يدعم OBS وبرامج التسجيل الشائعة',
 }
 
 interface Seed {
@@ -359,23 +360,34 @@ const PRODUCT_SEEDS: Seed[] = [
 
 export const PRODUCTS: ProductCard[] = PRODUCT_SEEDS.map((seed) => ({
   ...seed,
+  title: `${seed.gameName} ${seed.kind}`,
+  tagline: 'إعداد سريع وتجربة مستقرة',
+  verified: true,
   description: `${seed.gameName} ${seed.kind} package with assisted setup, clean onboarding, and post-purchase support.`,
   features: buildFeatures(seed.gameName),
+  compatibility: { ...COMPATIBILITY },
   plans: plans(seed.priceFrom),
 }))
+
+export function getProduct(id: string): ProductCard | undefined {
+  return PRODUCTS.find((product) => product.id === id)
+}
 
 export const STATS: StatCard[] = [
   {
     value: '99.9%',
     label: 'Service uptime',
+    icon: 'trophy',
   },
   {
     value: '24/7',
     label: 'Support availability',
+    icon: 'users',
   },
   {
     value: '12+',
     label: 'Supported titles',
+    icon: 'shield-check',
   },
 ]
 
@@ -384,22 +396,25 @@ export const BENEFITS: BenefitCard[] = [
     title: 'Fast onboarding',
     description:
       'Guided activation keeps setup clear from purchase to first session.',
+    visual: 'version',
   },
   {
     title: 'Private configuration',
     description:
       'Profiles and preferences remain local to your workflow whenever possible.',
+    visual: 'shield-glow',
   },
   {
     title: 'Ongoing updates',
     description:
       'Packages are maintained so supported titles stay usable through regular changes.',
+    visual: 'changelog',
   },
 ]
 
 export const FOOTER_COLUMNS: FooterColumn[] = [
   {
-    title: 'روابط',
+    heading: 'روابط',
     links: [
       { label: 'المنتجات', href: '#/products' },
       { label: 'الأسئلة الشائعة', href: '#faq' },
@@ -407,7 +422,7 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
     ],
   },
   {
-    title: 'الدعم',
+    heading: 'الدعم',
     links: [
       { label: 'واتساب', href: 'https://wa.me/966573534407' },
       { label: 'اتصال مباشر', href: 'tel:+966573534407' },
