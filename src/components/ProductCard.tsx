@@ -9,24 +9,10 @@ export default function ProductCard({ name, price, href }: ProductCardProps) {
     <a
       href={href}
       className="
-        group
-        relative
-        flex
-        min-h-[400px]
-        w-full
-        items-center
-        justify-center
-        overflow-hidden
-        rounded-xl
-        border
-        border-transparent
-        bg-gray-900
-        text-center
-        no-underline
-        transition-all
-        duration-500
-        hover:-translate-y-2
-        hover:border-white/35
+        flex min-h-[400px] w-full items-center justify-center
+        rounded-xl border border-transparent bg-gray-900
+        text-center no-underline transition-all duration-500
+        hover:-translate-y-2 hover:border-white/35
       "
     >
       <div className="flex flex-col items-center justify-center gap-3 p-8">
