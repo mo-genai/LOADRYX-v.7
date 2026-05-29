@@ -18,7 +18,16 @@ export function Hero() {
   const titleContainerRef = useRef<HTMLDivElement>(null)
 
   return (
-    <section dir="rtl" className="font-ar relative">
+    <section
+      <HeroDotGrid />
+      dir="rtl"
+      className="font-ar relative"
+      style={{
+        zIndex: 1,
+        maskImage: 'linear-gradient(to bottom, black 0%, black 80%, transparent 100%)',
+        WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 80%, transparent 100%)',
+      }}
+    >  
       <div className="relative pt-24 sm:pt-32 lg:pt-40 pb-12 sm:pb-16 lg:pb-32">
         {/* --------------- Layer 1+2: video frame, 75% width on lg+, side-masked --------------- */}
         <div className="absolute inset-0 -z-20 h-full lg:w-3/4 xl:w-3/4 2xl:w-3/4 mx-auto overflow-hidden">
@@ -96,10 +105,7 @@ export function Hero() {
           }}
         />
 
-        {/* --------------- Layer 5.5: ReactBits DotGrid (hero only) --------- */}
-        {/* Sits above the vignettes (-z-10) and below the in-flow content. */}
-        <HeroDotGrid />
-
+        
         {/* --------------- Layer 6: content (title + buttons) --------------- */}
         <div className="mx-auto max-w-6xl px-4 sm:px-4 md:px-12 lg:px-12 xl:px-16 2xl:px-16 text-center">
           {/* Title wrapper — establishes coords + holds the ghost + the live overlay */}
