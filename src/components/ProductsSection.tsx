@@ -5,7 +5,7 @@ const HOME_PRODUCT_COUNT = 12
 
 export function ProductsSection() {
   const products = PRODUCTS.slice(0, HOME_PRODUCT_COUNT)
-  const hasMore = PRODUCTS.length > HOME_PRODUCT_COUNT
+  const hasMore = PRODUCTS.length > 9
 
   return (
     <section
@@ -23,8 +23,8 @@ export function ProductsSection() {
           </p>
         </header>
 
-        <div className="relative mt-8 md:mt-16">
-          <div className="w-full mx-auto grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="relative mt-8 md:mt-16 overflow-hidden">
+          <div className="relative z-10 w-full mx-auto grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             {products.map((p) => (
               <ProductCard key={p.id} product={p} />
             ))}
@@ -34,12 +34,13 @@ export function ProductsSection() {
             <>
               <div
                 aria-hidden
-                className="pointer-events-none absolute inset-x-0 bottom-0 h-[420px] bg-gradient-to-b from-transparent via-[var(--color-background)]/85 to-[var(--color-background)]"
+                className="pointer-events-none absolute inset-x-0 bottom-0 z-30 h-[430px] bg-gradient-to-b from-transparent via-[#020617]/95 to-[#020617]"
               />
-              <div className="absolute inset-x-0 bottom-0 flex justify-center pb-10">
+
+              <div className="absolute inset-x-0 bottom-[95px] z-40 flex justify-center">
                 <a
                   href="#/products"
-                  className="pointer-events-auto rounded-xl bg-gray-400/10 px-6 py-3 text-sm font-medium text-white hover:bg-gray-200/10"
+                  className="rounded-xl bg-gray-400/10 px-6 py-3 text-sm font-medium text-white shadow-lg backdrop-blur-sm hover:bg-gray-200/10"
                 >
                   Show All
                 </a>
