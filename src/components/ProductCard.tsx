@@ -1,12 +1,20 @@
-type ProductCardProps = {
+export type Product = {
   name: string;
   price: string;
   href: string;
 };
 
-export function ProductCard({ name, price, href }: ProductCardProps) {
+type ProductCardProps =
+  | Product
+  | {
+      product: Product;
+    };
+
+export function ProductCard(props: ProductCardProps) {
+  const product = "product" in props ? props.product : props;
+
   return (
-    <a href={href} className="block no-underline">
+    <a href={product.href} className="block no-underline">
       <div className="group relative overflow-hidden rounded-xl bg-gray-900 transition-all hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-2 hover:border-primary/50 duration-500 cursor-pointer border border-transparent">
         <div className="absolute inset-0 z-0">
           <div
@@ -27,7 +35,9 @@ export function ProductCard({ name, price, href }: ProductCardProps) {
 
         <div className="relative z-20 p-5 flex flex-col h-full min-h-[400px]">
           <div className="mt-auto">
-            <h3 className="text-2xl font-bold text-white mb-2">{name}</h3>
+            <h3 className="text-2xl font-bold text-white mb-2">
+              {product.name}
+            </h3>
 
             <div
               className="mb-3"
@@ -51,7 +61,7 @@ export function ProductCard({ name, price, href }: ProductCardProps) {
                   textShadow: "rgba(0,0,0,0.75) 0px 2px 14px",
                 }}
               >
-                {price}
+                {product.price}
               </p>
             </div>
           </div>
