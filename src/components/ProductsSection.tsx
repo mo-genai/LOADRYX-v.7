@@ -1,4 +1,4 @@
-import ProductCard from "./ProductCard";
+import { ProductCard } from "./ProductCard";
 
 const products = [
   { name: "Fortnite", price: "1,426 ريال", href: "/products/fortnite-cheat" },
@@ -15,7 +15,7 @@ const products = [
   { name: "MW II Cheat", price: "1,426 ريال", href: "/products/mw-ii-cheat" },
 ];
 
-export default function ProductsSection() {
+export function ProductsSection() {
   return (
     <section className="bg-zinc-50 py-16 md:py-32 dark:bg-transparent relative z-0">
       <div
@@ -80,3 +80,5 @@ export default function ProductsSection() {
     </section>
   );
 }
+
+export default ProductsSection;
