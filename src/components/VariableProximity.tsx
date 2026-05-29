@@ -238,7 +238,7 @@ export const VariableProximity = forwardRef<HTMLSpanElement, Props>(
       <span
         ref={ref}
         className={`${className} variable-proximity`}
-        style={{ display: 'inline' }}
+        style={{ display: 'inline', whiteSpace: 'normal' }}
       >
         {tokens.map((tok, ti) => {
           if (tok.kind === 'space') return <span key={`s${ti}`}>{tok.value}</span>
@@ -246,7 +246,7 @@ export const VariableProximity = forwardRef<HTMLSpanElement, Props>(
             <span
               key={`w${ti}`}
               style={{
-                display: 'inline-block',
+                display: 'inline',
                 whiteSpace: 'nowrap',
                 ...(tok.latin
                   ? { direction: 'ltr', unicodeBidi: 'isolate' as const }
