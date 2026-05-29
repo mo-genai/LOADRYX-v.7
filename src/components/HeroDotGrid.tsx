@@ -144,7 +144,7 @@ export function HeroDotGrid() {
     <div
       ref={hostRef}
       aria-hidden
-      className="absolute inset-0 w-full h-full pointer-events-none"
+      className="absolute inset-0 w-full h-full"
     />
   )
 }
