@@ -6,22 +6,55 @@ type ProductCardProps = {
 
 export default function ProductCard({ name, price, href }: ProductCardProps) {
   return (
-    <a
-      href={href}
-      className="
-        flex min-h-[400px] w-full items-center justify-center
-        rounded-xl border border-transparent bg-gray-900
-        text-center no-underline transition-all duration-500
-        hover:-translate-y-2 hover:border-white/35
-      "
-    >
-      <div className="flex flex-col items-center justify-center gap-3 p-8">
-        <h3 className="m-0 text-2xl font-bold leading-tight text-white">
-          {name}
-        </h3>
+    <a href={href}>
+      <div className="group relative overflow-hidden rounded-xl bg-gray-900 transition-all hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-2 hover:border-primary/50 duration-500 cursor-pointer border border-transparent">
+        <div className="absolute inset-0 z-0">
+          <div
+            className="relative w-full h-full transition-transform duration-500 group-hover:scale-[1.05] transform-gpu"
+            style={{
+              clipPath: "inset(0 round 0.75rem)",
+              minHeight: "400px",
+            }}
+          />
 
-        <div className="text-xl font-semibold leading-relaxed text-white/70">
-          {price}
+          <div
+            className="absolute -inset-2 bg-gradient-to-b from-gray-900/40 to-gray-900 z-10"
+            style={{
+              clipPath: "inset(0 round 0.75rem)",
+            }}
+          />
+        </div>
+
+        <div className="relative z-20 p-5 flex flex-col h-full min-h-[400px]">
+          <div className="mt-auto">
+            <h3 className="text-2xl font-bold text-white mb-2">{name}</h3>
+
+            <div
+              className="mb-3"
+              style={{
+                direction: "rtl",
+                textAlign: "right",
+                fontSize: "24px",
+                fontWeight: 800,
+                color: "rgb(255,255,255)",
+                textShadow: "rgba(0,0,0,0.75) 0px 2px 14px",
+              }}
+            >
+              <p
+                className="text-xl font-bold text-white"
+                style={{
+                  direction: "rtl",
+                  textAlign: "right",
+                  fontSize: "24px",
+                  fontWeight: 800,
+                  color: "rgb(255,255,255)",
+                  textShadow: "rgba(0,0,0,0.75) 0px 2px 14px",
+                }}
+              >
+                {price}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </a>
