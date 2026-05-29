@@ -1,20 +1,9 @@
 import { useEffect, useState } from 'react'
 import { NAV_LINKS } from '../data/content'
-import { CloseIcon, MenuIcon } from './icons'
 
 const LR_LOGO_SRC =
   'https://res.cloudinary.com/dmp1fo2j4/image/upload/v1779955949/LR_logo_vilxah.svg'
 
-/**
- * Per teardown §5 (container/animation preserved verbatim):
- *  - Wrapper is fixed, full width, px-2
- *  - Empty `absolute inset-0` pill div takes border / glass / bg / narrower
- *    max-width on scrollY > 12, with a 600ms transition.
- *  - Content row holds the logo, links, CTA — independent of the pill.
- *  - Link hover is just a fast (150ms) color change, no underline or glow.
- *
- * RTL: dir="rtl" puts the logo on the right, links centered, CTA on the left.
- */
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
@@ -26,9 +15,6 @@ export function Header() {
     return () => window.removeEventListener('scroll', on)
   }, [])
 
-  // "تواصل معنا" should reach the contact section from anywhere. We use an
-  // instant jump (not smooth): the hero video keeps the layout reflowing, which
-  // cancels long smooth-scroll animations on this page.
   const goToContact = (e: React.MouseEvent) => {
     e.preventDefault()
     setMenuOpen(false)
@@ -37,14 +23,12 @@ export function Header() {
       here.scrollIntoView({ behavior: 'instant', block: 'start' })
       return
     }
-    // On another page: route home, then land on the contact section. The page
-    // reflows as it mounts, so wait until the section's position is stable for
-    // two consecutive checks before jumping (an early jump would miss as
-    // content grows below it).
+
     window.location.hash = '#/'
     let tries = 0
     let lastTop = -1
     let stable = 0
+
     const tick = () => {
       const el = document.getElementById('contact')
       if (el) {
@@ -65,49 +49,85 @@ export function Header() {
       }
       window.setTimeout(tick, 50)
     }
+
     window.setTimeout(tick, 50)
   }
 
   return (
-    <nav dir="rtl" className="font-ar fixed z-50 w-full px-2">
-      {/* PILL backdrop — empty, transitions on scroll */}
+    <nav className="fixed z-50 w-full px-2">
       <div
         aria-hidden
         className={[
-          'absolute inset-0 mx-2 lg:mx-auto mt-2 rounded-2xl transition-600',
-          scrolled
-            ? 'max-w-4xl border border-white/10 bg-[color-mix(in_oklab,var(--color-background)_75%,transparent)] backdrop-blur-xl'
-            : 'max-w-full border border-transparent bg-transparent backdrop-blur-0',
+          'absolute inset-0 mx-2 lg:mx-auto mt-2 transition-all ease-in-out duration-600 rounded-2xl',
+          scrolled ? 'bg-background/50 max-w-6xl border backdrop-blur-lg' : 'max-w-full',
         ].join(' ')}
       />
 
-      {/* CONTENT row */}
       <div
         className={[
-          'relative mx-2 lg:mx-auto mt-2 px-5 lg:px-4 transition-600',
-          scrolled ? 'lg:max-w-4xl' : 'lg:max-w-full max-w-full',
+          'relative mx-2 lg:mx-auto mt-2 px-5 transition-all ease-in-out duration-600 lg:px-4',
+          scrolled ? 'max-w-6xl' : 'max-w-full',
         ].join(' ')}
       >
         <div className="relative flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">
-          <a href="#" aria-label="LOADRYX" className="flex items-center text-white">
-            <img
-              src={LR_LOGO_SRC}
-              alt="LOADRYX"
-              className="h-8 w-auto select-none"
-              draggable={false}
-            />
-          </a>
+          <div className="flex w-full justify-between lg:w-auto">
+            <a href="/" aria-label="LOADRYX" className="flex items-center space-x-2">
+              <img
+                src={LR_LOGO_SRC}
+                alt="LOADRYX"
+                className="h-8 w-auto select-none"
+                draggable={false}
+              />
+            </a>
 
-          {/* desktop nav links — flat, fast color hover */}
+            <button
+              type="button"
+              aria-label="القائمة"
+              aria-expanded={menuOpen}
+              data-state={menuOpen ? 'active' : 'inactive'}
+              onClick={() => setMenuOpen((o) => !o)}
+              className="relative z-20 -m-2.5 -mr-4 block cursor-pointer p-2.5 lg:hidden"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="in-data-[state=active]:rotate-180 in-data-[state=active]:scale-0 in-data-[state=active]:opacity-0 m-auto size-6 duration-200"
+              >
+                <line x1="4" y1="12" x2="20" y2="12" />
+                <line x1="4" y1="6" x2="20" y2="6" />
+                <line x1="4" y1="18" x2="20" y2="18" />
+              </svg>
+
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="in-data-[state=active]:rotate-0 in-data-[state=active]:scale-100 in-data-[state=active]:opacity-100 absolute inset-0 m-auto size-6 -rotate-180 scale-0 opacity-0 duration-200"
+              >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+          </div>
+
           <div className="absolute inset-0 m-auto hidden size-fit lg:block">
-            <ul className="flex gap-8 text-sm list-none m-0 p-0">
+            <ul className="flex gap-8 text-sm">
               {NAV_LINKS.map((l) => (
                 <li key={l.label}>
                   <a
                     href={l.href}
-                    className="block text-white/60 hover:text-white duration-150"
+                    className="text-muted-foreground hover:text-accent-foreground block duration-150"
                   >
-                    {l.label}
+                    <span>{l.label}</span>
                   </a>
                 </li>
               ))}
@@ -118,54 +138,43 @@ export function Header() {
             <a
               href="#contact"
               onClick={goToContact}
-              className="pill-btn pill-btn-primary text-sm"
+              className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-primary text-primary-foreground shadow-xs hover:bg-primary/90 h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5"
             >
-              تواصل معنا
+              <span>تواصل معنا</span>
             </a>
           </div>
-
-          {/* mobile menu toggle */}
-          <button
-            type="button"
-            onClick={() => setMenuOpen((o) => !o)}
-            aria-label="القائمة"
-            aria-expanded={menuOpen}
-            className="relative z-20 grid size-10 place-items-center rounded-lg text-white lg:hidden"
-          >
-            {menuOpen ? (
-              <CloseIcon className="size-6" />
-            ) : (
-              <MenuIcon className="size-6" />
-            )}
-          </button>
         </div>
+      </div>
 
-        {/* mobile dropdown */}
-        {menuOpen && (
-          <div className="absolute left-0 right-0 top-full z-20 mt-2 rounded-2xl border border-white/10 bg-[color-mix(in_oklab,var(--color-background)_94%,transparent)] p-3 backdrop-blur-xl shadow-xl lg:hidden">
-            <ul className="flex flex-col gap-1 text-sm list-none m-0 p-0">
+      {menuOpen && (
+        <div className="absolute left-0 right-0 top-full w-full px-2 lg:hidden">
+          <div className="lg:mx-auto mt-2 max-w-full px-5 bg-background rounded-2xl border py-6">
+            <ul className="space-y-6 text-base mb-6">
               {NAV_LINKS.map((l) => (
                 <li key={l.label}>
                   <a
                     href={l.href}
                     onClick={() => setMenuOpen(false)}
-                    className="block rounded-lg px-3 py-3 text-white/80 hover:bg-white/5 hover:text-white"
+                    className="text-muted-foreground hover:text-accent-foreground block duration-150"
                   >
-                    {l.label}
+                    <span>{l.label}</span>
                   </a>
                 </li>
               ))}
             </ul>
-            <a
-              href="#contact"
-              onClick={goToContact}
-              className="mt-2 pill-btn pill-btn-primary w-full justify-center text-sm"
-            >
-              تواصل معنا
-            </a>
+
+            <div className="flex flex-col space-y-3">
+              <a
+                href="#contact"
+                onClick={goToContact}
+                className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-primary text-primary-foreground shadow-xs hover:bg-primary/90 h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5"
+              >
+                <span>تواصل معنا</span>
+              </a>
+            </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </nav>
   )
 }
