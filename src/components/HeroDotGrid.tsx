@@ -281,7 +281,7 @@ export function HeroDotGrid() {
   }, [])
 
   return (
-    <div ref={wrapperRef} aria-hidden className="absolute inset-0 w-full h-full">
+    <div ref={wrapperRef} aria-hidden className="pointer-events-none absolute inset-0 w-full h-full">
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" />
     </div>
   )
