@@ -117,7 +117,7 @@ const ASSETS: Record<
 export function ProductCard({ product }: ProductCardProps) {
   const asset = ASSETS[product.id]
   const title = asset?.title ?? `${product.gameName} Cheat`
-  const href = asset?.href ?? `/products/${product.id}`
+  const href = `#/product/${product.id}`
   const image = asset?.image
   const logo = asset?.logo
 
