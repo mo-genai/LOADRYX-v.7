@@ -29,7 +29,7 @@ function FeatureIcon({
 }) {
   return (
     <div
-      className="relative mx-auto mt-5 grid size-24 place-items-center"
+      className="relative mx-auto mt-6 grid size-24 place-items-center"
       style={
         {
           ['--color-border' as never]:
@@ -58,18 +58,18 @@ function FeatureIcon({
 
 export function WhySection() {
   return (
-    <section dir="rtl" className="font-ar pt-24 pb-16 md:pt-40 md:pb-32 dark:bg-transparent">
+    <section dir="rtl" className="font-ar pt-27 pb-16 md:pt-44 md:pb-32 dark:bg-transparent">
       <div className="mx-auto max-w-6xl px-6">
         <header className="text-center">
           <h2 className="font-ar-display text-balance text-4xl font-semibold lg:text-5xl">
             {WHY.title}
           </h2>
-          <p className="mx-auto mt-5 max-w-2xl text-lg text-white/60">
+          <p className="mx-auto mt-6 max-w-5xl text-lg text-white/60 md:whitespace-nowrap">
             {WHY.subtitle}
           </p>
         </header>
 
-        <div className="mx-auto mt-10 grid max-w-5xl grid-cols-1 gap-5 md:mt-16 lg:grid-cols-3">
+        <div className="mx-auto mt-12 grid max-w-5xl grid-cols-1 gap-5 md:mt-18 lg:grid-cols-3">
           {FEATURES.map((feat) => {
             const Icon = ICONS[feat.icon]
             return (
