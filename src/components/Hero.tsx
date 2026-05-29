@@ -97,13 +97,13 @@ export function Hero() {
               <div className="text-center sm:mx-auto lg:mr-auto lg:mt-0">
                 <div
                   ref={titleContainerRef}
-                  className="font-ar-display relative mt-8"
+                  className="font-ar-display relative mt-14"
                   style={{ position: 'relative', textAlign: 'center', width: '100%' }}
                 >
                   <div
                     aria-hidden
                     className="invisible pointer-events-none select-none"
-                    style={{ fontFamily: 'Cairo', fontVariationSettings: "'wght' 900" }}
+                    style={{ fontVariationSettings: "'wght' 900" }}
                   >
                     {HERO.lines.map((line) => (
                       <div
@@ -133,7 +133,7 @@ export function Hero() {
                   </div>
                 </div>
 
-                <p className="mx-auto mt-8 max-w-2xl text-balance text-base sm:text-lg px-4 sm:px-0">
+                <p className="mx-auto mt-10 max-w-2xl text-balance text-lg sm:text-xl px-4 sm:px-0">
                   <span
                     className="inline-block animate-fade-in-blur"
                     style={{
@@ -146,14 +146,14 @@ export function Hero() {
                   </span>
                 </p>
 
-                <div className="mt-12 flex flex-col items-center justify-center gap-3 sm:gap-4 lg:flex-row px-4 sm:px-0">
+                <div className="mt-14 flex flex-col items-center justify-center gap-3 sm:gap-4 lg:flex-row px-4 sm:px-0">
                   <div className="animate-fade-in-blur [animation-delay:1.2s] [animation-fill-mode:backwards] w-full md:w-auto">
                     <a
                       href="#products"
                       className="inline-flex h-10 w-full items-center justify-center gap-2 whitespace-nowrap rounded-xl px-5 text-base font-medium shadow-xs transition-all md:w-auto"
                       style={{
-                        backgroundColor: 'oklch(0.922 0 0)',
-                        color: 'oklch(0.205 0 0)',
+                        backgroundColor: 'var(--color-primary)',
+                        color: 'var(--color-primary-foreground)',
                       }}
                     >
                       <span className="text-nowrap">{HERO.primaryCta}</span>
