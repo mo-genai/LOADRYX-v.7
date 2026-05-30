@@ -1,68 +1,115 @@
-import { BRAND, FOOTER_ABOUT, FOOTER_COLUMNS } from '../data/content'
-import { ChatBubbleIcon, GlobeIcon, NimbusMark } from './icons'
+import { BRAND, FOOTER_ABOUT } from '../data/content'
+import { ChatBubbleIcon, GlobeIcon } from './icons'
+
+const popularCheats = [
+  ['Fortnite', '#/product/fortnite'],
+  ['Z1BR', '#/products'],
+  ['Apex', '#/product/apex'],
+  ['DayZ', '#/product/dayz'],
+  ['Arma 3', '#/product/arma-3'],
+  ['PUBG', '#/product/pubg'],
+]
+
+const moreCheats = [
+  ['OW 2', '#/product/overwatch-2'],
+  ['BO6/WZ', '#/product/black-ops-6'],
+  ['Vanguard', '#/products'],
+  ['MW2019', '#/products'],
+  ['MW II', '#/product/mw-ii'],
+  ['MW III', '#/product/mw-iii'],
+]
+
+const quickLinks = [
+  ['Status', '#'],
+  ['Getting Started', '#'],
+  ['FAQs', '#faq'],
+  ['Applications', '#'],
+  ['Store', '#/products'],
+  ['Manage Purchases', '#'],
+]
+
+function FooterColumn({ title, links }: { title: string; links: string[][] }) {
+  return (
+    <div className="space-y-4 text-sm">
+      <span className="block font-bold">{title}</span>
+      {links.map(([label, href]) => (
+        <a
+          key={label}
+          className="text-muted-foreground hover:text-primary block duration-150"
+          href={href}
+        >
+          <span>{label}</span>
+        </a>
+      ))}
+    </div>
+  )
+}
 
 export function Footer() {
   return (
-    <footer className="mt-12 border-t border-white/10">
-      <div className="mx-auto max-w-7xl px-6 py-12">
-        <div className="flex items-center justify-between">
-          <a href="#" className="flex items-center gap-2 text-white">
-            <NimbusMark size={36} />
-            <span className="sr-only">{BRAND}</span>
+    <footer className="border-b bg-white pt-20 dark:bg-transparent">
+      <div className="mb-8 border-b md:mb-12">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-end justify-between gap-6 px-4 pb-6 lg:px-8">
+          <a href="#" aria-label="go home" className="block size-fit">
+            <img
+              alt={BRAND}
+              className="h-8 w-auto select-none"
+              draggable="false"
+              src="https://res.cloudinary.com/dmp1fo2j4/image/upload/v1779955949/LR_logo_vilxah.svg"
+            />
           </a>
-          <div className="flex items-center gap-3 text-white/70">
+
+          <div className="flex flex-wrap justify-center gap-6 text-sm">
             <a
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-primary block"
               href="#"
               aria-label="Forum"
-              className="grid size-9 place-items-center rounded-full border border-white/10 hover:text-white hover:border-white/20"
             >
-              <GlobeIcon className="size-4" />
+              <GlobeIcon className="size-8" />
             </a>
             <a
-              href="#"
-              aria-label="Chat"
-              className="grid size-9 place-items-center rounded-full border border-white/10 hover:text-white hover:border-white/20"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-primary block"
+              href="#contact"
+              aria-label="Discord"
             >
-              <ChatBubbleIcon className="size-4" />
+              <ChatBubbleIcon className="size-8" />
             </a>
           </div>
         </div>
+      </div>
 
-        <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-8">
-          {FOOTER_COLUMNS.map((col) => (
-            <div key={col.heading}>
-              <h4 className="text-sm font-semibold">{col.heading}</h4>
-              <ul className="mt-3 space-y-2">
-                {col.links.map((l) => (
-                  <li key={l.label}>
-                    <a
-                      href={l.href}
-                      className="text-sm text-white/55 hover:text-white"
-                    >
-                      {l.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
+      <div className="mx-auto max-w-6xl px-4 lg:px-8">
+        <div className="grid gap-12 md:grid-cols-5 md:gap-0 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-6 md:col-span-3 md:row-start-1 lg:col-span-2 lg:grid-cols-3">
+            <FooterColumn title="Popular Cheats" links={popularCheats} />
+            <FooterColumn title="More Cheats" links={moreCheats} />
+            <FooterColumn title="Quick Links" links={quickLinks} />
+          </div>
+
+          <form className="row-start-1 border-b pb-8 text-sm md:col-span-4 md:border-none lg:col-span-2">
+            <div className="space-y-4">
+              <label className="block font-bold">LOADRYX</label>
+              <span className="text-muted-foreground block text-sm/6">
+                {FOOTER_ABOUT}
+              </span>
+              <a
+                href="#imprint"
+                className="text-muted-foreground hover:text-primary inline-block text-sm duration-150"
+              >
+                Imprint
+              </a>
             </div>
-          ))}
-          <div>
-            <h4 className="text-sm font-semibold">{BRAND}</h4>
-            <p className="mt-3 text-sm leading-relaxed text-white/55">
-              {FOOTER_ABOUT}
-            </p>
-            <a
-              href="#imprint"
-              className="mt-3 inline-block text-sm text-white/55 hover:text-white"
-            >
-              Imprint
-            </a>
-          </div>
+          </form>
         </div>
 
-        <div className="mt-12 border-t border-white/10 pt-6 text-center text-xs text-white/45">
-          Copyright 2017–2026 {BRAND.toLowerCase()}.example — Placeholder learning clone. All marks
-          are illustrative.
+        <div className="mt-12 gap-6 border-t py-6">
+          <small className="text-muted-foreground order-last block text-center text-sm md:order-first">
+            Copyright 2017-2026 loadryx.com – All trademarks, screenshots and logos are the property of their respective owners.
+          </small>
         </div>
       </div>
     </footer>
