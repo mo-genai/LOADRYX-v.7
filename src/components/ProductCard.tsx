@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 
-import { priceSAR } from '../data/content'
+
 import type { ProductCard as Product } from '../types/content'
 
 type ProductCardProps = {
@@ -116,13 +116,16 @@ const ASSETS: Record<
 
 export function ProductCard({ product }: ProductCardProps) {
   const asset = ASSETS[product.id]
+  const title = asset?.title ?? `${product.gameName} Cheat`
   const href = `#/product/${product.id}`
   const image = asset?.image
-  const gameName = product.gameName.toUpperCase()
-  const price = `${priceSAR(product.priceFrom).toLocaleString('en-US')} ر.س`
+  const logo = asset?.logo
+
+  const statusLabel = product.status === 'beta' ? 'Testing' : 'Undetected'
+  const statusColor = product.status === 'beta' ? 'bg-red-500' : 'bg-green-500'
 
   return (
-    <a href={href} dir="rtl" className="block">
+    <a href={href} dir="ltr">
       <div className="group relative overflow-hidden rounded-xl bg-gray-900 transition-all hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-2 hover:border-primary/50 duration-500 cursor-pointer border border-transparent">
         <div className="absolute inset-0 z-0">
           <div
@@ -137,7 +140,7 @@ export function ProductCard({ product }: ProductCardProps) {
               <img
                 src={image}
                 sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                alt={gameName}
+                alt={title}
                 className="object-cover w-full h-full"
                 loading="lazy"
                 decoding="async"
@@ -146,34 +149,80 @@ export function ProductCard({ product }: ProductCardProps) {
           </div>
 
           <div
-            className="absolute -inset-2 bg-gradient-to-b from-gray-900/30 via-gray-950/25 to-gray-950 z-10"
+            className="absolute -inset-2 bg-gradient-to-b from-gray-900/40 to-gray-900 z-10"
             style={{ clipPath: 'inset(0 round 0.75rem)' }}
           />
         </div>
 
-        <div className="relative z-20 flex h-full min-h-[400px] flex-col items-center justify-end p-5 text-center">
-          <div className="mb-8 w-full">
-            <h3 className="text-4xl font-black tracking-[0.08em] text-white drop-shadow-lg" dir="ltr">
-              {gameName}
-            </h3>
-
-            <p className="mt-5 text-sm font-semibold tracking-[0.45em] text-white/85" dir="ltr">
-              AI AIM PROGRAM
-            </p>
-
-            <p className="mt-8 text-5xl font-black tracking-tight text-white drop-shadow-lg" dir="rtl">
-              {price}
-            </p>
+        <div className="relative z-20 p-5 flex flex-col h-full min-h-[400px] text-left">
+          <div className="relative h-10 w-28">
+            {logo ? (
+              <img
+                src={logo}
+                sizes="112px"
+                alt={`${title} logo`}
+                className="object-contain w-full h-full"
+                loading="lazy"
+                decoding="async"
+              />
+            ) : (
+              <div className="text-white text-2xl font-black tracking-wide">
+                {product.monogram}
+              </div>
+            )}
           </div>
 
-          <div
-            className="inline-flex h-12 w-full items-center justify-center gap-2 whitespace-nowrap rounded-xl px-5 text-base font-semibold transition-all pointer-events-none"
-            style={{
-              backgroundColor: '#f4f4f5',
-              color: '#18181b',
-            }}
-          >
-            شراء الآن
+          <div className="mt-auto">
+            <h3 className="text-2xl font-bold text-white mb-2 text-left">
+              {title}
+            </h3>
+
+            <div className="mb-3 text-left">
+              <p className="text-sm text-gray-300">Starting price</p>
+              <p className="text-xl font-bold text-white">
+                from ${product.priceFrom.toFixed(2)}
+              </p>
+            </div>
+
+            <div className="flex items-center gap-4 mb-4 relative">
+              <div className="flex items-center gap-2">
+                <div className="flex items-center">
+                  <div className={`mt-0.5 w-2 h-2 rounded-full ${statusColor} mr-2`} />
+                  <span className="text-sm text-gray-300">{statusLabel}</span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <div className="relative inline-block" role="presentation">
+                  <div className="flex items-center cursor-help">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="w-4 h-4 text-blue-400 mr-1"
+                    >
+                      <path d="M12 3 4 7v6c0 5 3.4 8.7 8 9.9 4.6-1.2 8-4.9 8-9.9V7z" />
+                      <path d="m9 12 2 2 4-4" />
+                    </svg>
+                    <span className="text-sm text-gray-300">Verification</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all shrink-0 outline-none h-9 px-4 py-2 w-full pointer-events-none"
+              style={{
+                backgroundColor: '#f4f4f5',
+                color: '#18181b',
+              }}
+            >
+              Purchase Now
+            </div>
           </div>
         </div>
       </div>
