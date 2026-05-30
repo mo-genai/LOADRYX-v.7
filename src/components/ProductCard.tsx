@@ -146,7 +146,7 @@ export function ProductCard({ product }: ProductCardProps) {
           </div>
 
           <div
-            className="absolute -inset-2 bg-gradient-to-b from-gray-900/25 via-gray-950/30 to-gray-950 z-10"
+            className="absolute -inset-2 bg-gradient-to-b from-gray-900/40 to-gray-900 z-10"
             style={{ clipPath: 'inset(0 round 0.75rem)' }}
           />
         </div>
