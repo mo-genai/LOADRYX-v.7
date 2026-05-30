@@ -16,13 +16,10 @@ export function ProductsPage() {
 
         <div className="mx-auto max-w-6xl px-4 lg:px-8">
           <div className="text-center">
-            <h1
-              className="font-ar-display text-balance text-4xl font-semibold lg:text-5xl"
-              style={{ fontSize: 'clamp(2.25rem, 4vw, 3rem)' }}
-            >
+            <h1 className="font-ar-display text-balance text-4xl font-semibold lg:text-5xl">
               الباقات المتوفرة
             </h1>
-            <p className="mx-auto mt-4 max-w-3xl text-muted-foreground">
+            <p className="mx-auto mt-3 max-w-2xl text-white/60">
               اختر الباقة المناسبة لك، وابدأ بخطوات واضحة مع تجربة استخدام مستقرة
               ودعم مباشر بعد الشراء.
             </p>
