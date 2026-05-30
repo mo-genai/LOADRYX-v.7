@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { formatSAR, getProduct } from '../data/content'
 import { productImage } from '../data/productImages'
+import { ApexProductPage } from './ApexProductPage'
 import {
   BoltIcon,
   BoxIcon,
@@ -70,6 +71,11 @@ export function ProductDetailPage({ id }: { id: string }) {
         </div>
       </section>
     )
+  }
+
+  // The Apex product page has its own dedicated Arabic RTL layout.
+  if (product.id === 'apex') {
+    return <ApexProductPage id={product.id} />
   }
 
   const cover = productImage(product.id)
