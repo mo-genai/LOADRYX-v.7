@@ -54,23 +54,28 @@ export function ProductDetailPage({ id }: { id: string }) {
   return (
     <article dir="rtl" className="font-ar bg-[var(--color-background)]">
       {/* ---------------- Hero ---------------- */}
-      <section className="relative overflow-hidden">
+      <section className="relative min-h-screen overflow-hidden pt-36 pb-40">
         {/* Background cover art */}
-        <div className="absolute inset-0" aria-hidden>
+        <div className="absolute inset-0 -z-10" aria-hidden>
+          <div className="absolute inset-0 z-10 bg-gradient-to-b from-background/75 via-background/30 to-background/75 pointer-events-none" />
+          <div className="absolute inset-0 z-10 bg-gradient-to-r from-background/65 via-background/20 to-background/65 pointer-events-none" />
+          <div className="absolute inset-0 z-10 bg-[radial-gradient(circle_at_center,transparent_15%,var(--color-background)_95%)] pointer-events-none" />
+          <div className="absolute inset-x-0 top-0 h-64 z-10 bg-gradient-to-b from-background to-transparent pointer-events-none" />
+          <div className="absolute inset-x-0 bottom-0 h-64 z-10 bg-gradient-to-t from-background to-transparent pointer-events-none" />
+          <div className="absolute inset-y-0 left-0 w-64 z-10 bg-gradient-to-r from-background to-transparent pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-64 z-10 bg-gradient-to-l from-background to-transparent pointer-events-none" />
           {cover ? (
             <img
               src={cover}
               alt=""
-              className="h-full w-full object-cover opacity-40"
+              className="absolute inset-0 h-full w-full object-cover object-top"
             />
           ) : (
-            <div className="h-full w-full" style={{ background: product.gradient }} />
+            <div className="absolute inset-0 h-full w-full" style={{ background: product.gradient }} />
           )}
-          <div className="absolute inset-0 bg-gradient-to-l from-[var(--color-background)] via-[var(--color-background)]/80 to-[var(--color-background)]/30" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-background)] via-transparent to-[var(--color-background)]/60" />
         </div>
 
-        <div className="relative mx-auto max-w-7xl px-6 pt-28 pb-14 sm:pt-32 lg:pt-40">
+        <div className="relative z-10 mx-auto max-w-6xl px-2 lg:px-2">
           <a
             href="#/products"
             className="inline-flex items-center gap-2 text-sm text-white/55 hover:text-white transition-colors"
@@ -78,7 +83,7 @@ export function ProductDetailPage({ id }: { id: string }) {
             العودة إلى المنتجات <span aria-hidden>→</span>
           </a>
 
-          <div className="mt-6 max-w-xl">
+          <div className="mt-8 max-w-xl">
             <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/15 px-3 py-1 text-xs font-medium text-emerald-300">
               <CheckCircleIcon className="size-3.5" />
               متوفر
