@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 
-
+import { priceSAR } from '../data/content'
 import type { ProductCard as Product } from '../types/content'
 
 type ProductCardProps = {
@@ -120,6 +120,7 @@ export function ProductCard({ product }: ProductCardProps) {
   const href = `#/product/${product.id}`
   const image = asset?.image
   const logo = asset?.logo
+  const price = `${priceSAR(product.priceFrom).toLocaleString('en-US')} ر.س`
 
   const statusLabel = product.status === 'beta' ? 'Testing' : 'Undetected'
   const statusColor = product.status === 'beta' ? 'bg-red-500' : 'bg-green-500'
@@ -178,9 +179,8 @@ export function ProductCard({ product }: ProductCardProps) {
             </h3>
 
             <div className="mb-3 text-left">
-              <p className="text-sm text-gray-300">Starting price</p>
-              <p className="text-xl font-bold text-white">
-                from ${product.priceFrom.toFixed(2)}
+              <p className="text-xl font-bold text-white" dir="rtl">
+                {price}
               </p>
             </div>
 
@@ -221,7 +221,7 @@ export function ProductCard({ product }: ProductCardProps) {
                 color: '#18181b',
               }}
             >
-              Purchase Now
+              شراء الآن
             </div>
           </div>
         </div>
