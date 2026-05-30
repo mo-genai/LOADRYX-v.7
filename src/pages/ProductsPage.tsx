@@ -10,7 +10,7 @@ export function ProductsPage() {
     <>
       <section
         dir="rtl"
-        className="font-ar relative pt-48 pb-24 overflow-hidden"
+        className="font-ar relative pt-32 md:pt-48 pb-24 overflow-hidden"
       >
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-zinc-100/50 to-white dark:from-background dark:to-background/80" />
 
@@ -29,7 +29,7 @@ export function ProductsPage() {
 
       <section dir="rtl" className="font-ar dark:bg-transparent">
         <div className="@container mx-auto max-w-6xl px-4 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-3 gap-6 justify-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-center">
             {PRODUCTS.map((p) => (
               <ProductCard key={p.id} product={p} />
             ))}

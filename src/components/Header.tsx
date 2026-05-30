@@ -169,7 +169,7 @@ export function Header() {
               <a
                 href="#contact"
                 onClick={goToContact}
-                className="inline-flex h-8 items-center justify-center gap-1.5 whitespace-nowrap rounded-md bg-[#e9e8eb] px-3 text-sm font-medium text-[#08060d] shadow-xs transition-all hover:bg-white"
+                className="inline-flex h-11 w-full items-center justify-center gap-1.5 whitespace-nowrap rounded-md bg-[#e9e8eb] px-3 text-sm font-medium text-[#08060d] shadow-xs transition-all hover:bg-white"
               >
                 <span>تواصل معنا</span>
               </a>

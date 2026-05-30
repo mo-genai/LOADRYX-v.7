@@ -87,7 +87,7 @@ export function ProductDetailPage({ id }: { id: string }) {
 
   return (
     <article dir="rtl" className="font-ar bg-[var(--color-background)]">
-      <section className="relative isolate overflow-hidden pt-36 pb-40">
+      <section className="relative isolate overflow-hidden pt-28 sm:pt-36 pb-24 sm:pb-40">
         <div className="absolute inset-0 z-0" aria-hidden>
           <div className="absolute inset-0 z-10 bg-gradient-to-b from-background/75 via-background/30 to-background/75 pointer-events-none" />
           <div className="absolute inset-0 z-10 bg-gradient-to-r from-background/65 via-background/20 to-background/65 pointer-events-none" />
@@ -107,7 +107,7 @@ export function ProductDetailPage({ id }: { id: string }) {
           )}
         </div>
 
-        <div className="relative z-10 mx-auto max-w-6xl px-2 lg:px-2" dir="ltr">
+        <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-4" dir="ltr">
           <div className="flex flex-col lg:grid lg:gap-8 lg:grid-cols-2">
             <div className="flex items-center justify-center order-first lg:order-last mb-8 lg:mb-0">
               <div className="relative h-48 w-48 md:h-64 md:w-64 lg:h-72 lg:w-72 -mb-8 z-20">
