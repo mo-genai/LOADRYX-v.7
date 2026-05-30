@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 
-import { priceSAR } from '../data/content'
 import type { ProductCard as Product } from '../types/content'
 
 type ProductCardProps = {
@@ -119,7 +118,7 @@ export function ProductCard({ product }: ProductCardProps) {
   const title = product.gameName.toUpperCase()
   const href = `#/product/${product.id}`
   const image = asset?.image
-  const price = `${priceSAR(product.priceFrom).toLocaleString('en-US')} ر.س`
+  const price = '1,426 ر.س'
 
   return (
     <a href={href} dir="rtl" className="block">
@@ -167,7 +166,7 @@ export function ProductCard({ product }: ProductCardProps) {
               AI AIM PROGRAM
             </p>
 
-            <p className="mt-5 text-3xl font-black text-white drop-shadow-lg" dir="rtl">
+            <p className="mt-5 font-ar text-3xl font-black text-white drop-shadow-lg" dir="rtl">
               {price}
             </p>
           </div>
