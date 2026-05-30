@@ -64,12 +64,12 @@ export function WhySection() {
           <h2 className="font-ar-display text-balance text-4xl font-semibold lg:text-5xl">
             {WHY.title}
           </h2>
-          <p className="mx-auto mt-6 max-w-5xl text-lg text-white/60 md:whitespace-nowrap">
+          <p className="mx-auto mt-6 max-w-3xl text-lg text-white/60">
             {WHY.subtitle}
           </p>
         </header>
 
-        <div className="mx-auto mt-12 grid max-w-5xl grid-cols-1 gap-5 md:mt-18 lg:grid-cols-3">
+        <div className="mx-auto mt-12 grid max-w-5xl grid-cols-1 gap-5 md:mt-18 sm:grid-cols-2 lg:grid-cols-3">
           {FEATURES.map((feat) => {
             const Icon = ICONS[feat.icon]
             return (

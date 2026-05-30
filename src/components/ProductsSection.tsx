@@ -25,7 +25,7 @@ export function ProductsSection() {
         </div>
 
         <div className="relative w-full mx-auto mt-8 md:mt-16">
-          <div className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-3 gap-6 justify-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-center">
             {visibleProducts.map((p) => (
               <ProductCard key={p.id} product={p} />
             ))}
@@ -34,7 +34,7 @@ export function ProductsSection() {
           {hasMore && (
             <div className="relative mt-6">
               <div className="relative h-[200px] overflow-hidden">
-                <div className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-3 gap-6 justify-center absolute top-0 left-0 right-0 pointer-events-none">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-center absolute top-0 left-0 right-0 pointer-events-none">
                   {previewProducts.map((p) => (
                     <ProductCard key={p.id} product={p} />
                   ))}

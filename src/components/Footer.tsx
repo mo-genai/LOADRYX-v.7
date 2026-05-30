@@ -83,14 +83,14 @@ export function Footer() {
       </div>
 
       <div className="mx-auto max-w-6xl px-4 lg:px-8">
-        <div className="grid gap-12 md:grid-cols-5 md:gap-0 lg:grid-cols-4">
-          <div className="grid grid-cols-1 gap-6 md:col-span-3 md:row-start-1 lg:col-span-2 lg:grid-cols-3">
+        <div className="grid gap-10 md:grid-cols-2 md:gap-8 lg:grid-cols-4 lg:gap-0">
+          <div className="grid grid-cols-3 gap-4 md:col-span-1 lg:col-span-2 lg:gap-6">
             <FooterColumn title="Popular Cheats" links={popularCheats} />
             <FooterColumn title="More Cheats" links={moreCheats} />
             <FooterColumn title="Quick Links" links={quickLinks} />
           </div>
 
-          <form className="row-start-1 border-b pb-8 text-sm md:col-span-4 md:border-none lg:col-span-2">
+          <form className="border-b pb-8 text-sm md:col-span-1 md:border-none lg:col-span-2">
             <div className="space-y-4">
               <label className="block font-bold">LOADRYX</label>
               <span className="text-muted-foreground block text-sm/6">
