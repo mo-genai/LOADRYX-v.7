@@ -54,9 +54,9 @@ export function ProductDetailPage({ id }: { id: string }) {
   return (
     <article dir="rtl" className="font-ar bg-[var(--color-background)]">
       {/* ---------------- Hero ---------------- */}
-      <section className="relative min-h-screen overflow-hidden pt-36 pb-40">
+      <section className="relative isolate min-h-screen overflow-hidden pt-36 pb-40">
         {/* Background cover art */}
-        <div className="absolute inset-0 -z-10" aria-hidden>
+        <div className="absolute inset-0 z-0" aria-hidden>
           <div className="absolute inset-0 z-10 bg-gradient-to-b from-background/75 via-background/30 to-background/75 pointer-events-none" />
           <div className="absolute inset-0 z-10 bg-gradient-to-r from-background/65 via-background/20 to-background/65 pointer-events-none" />
           <div className="absolute inset-0 z-10 bg-[radial-gradient(circle_at_center,transparent_15%,var(--color-background)_95%)] pointer-events-none" />
@@ -68,14 +68,14 @@ export function ProductDetailPage({ id }: { id: string }) {
             <img
               src={cover}
               alt=""
-              className="absolute inset-0 h-full w-full object-cover object-top"
+              className="absolute inset-0 z-0 h-full w-full object-cover object-top"
             />
           ) : (
-            <div className="absolute inset-0 h-full w-full" style={{ background: product.gradient }} />
+            <div className="absolute inset-0 z-0 h-full w-full" style={{ background: product.gradient }} />
           )}
         </div>
 
-        <div className="relative z-10 mx-auto max-w-6xl px-2 lg:px-2">
+        <div className="relative z-20 mx-auto max-w-6xl px-2 lg:px-2">
           <a
             href="#/products"
             className="inline-flex items-center gap-2 text-sm text-white/55 hover:text-white transition-colors"
